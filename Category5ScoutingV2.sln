@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Category5ScoutingV2.Server", "Category5ScoutingV2.Server\Category5ScoutingV2.Server.csproj", "{4FFB2D77-FA96-4F90-B0C6-9B465029FA3D}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "category5scoutingv2.client", "category5scoutingv2.client\category5scoutingv2.client.esproj", "{9005B312-47B3-4803-848F-AF0D8D53607F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FFB2D77-FA96-4F90-B0C6-9B465029FA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FFB2D77-FA96-4F90-B0C6-9B465029FA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FFB2D77-FA96-4F90-B0C6-9B465029FA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FFB2D77-FA96-4F90-B0C6-9B465029FA3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9005B312-47B3-4803-848F-AF0D8D53607F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9005B312-47B3-4803-848F-AF0D8D53607F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9005B312-47B3-4803-848F-AF0D8D53607F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9005B312-47B3-4803-848F-AF0D8D53607F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9005B312-47B3-4803-848F-AF0D8D53607F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9005B312-47B3-4803-848F-AF0D8D53607F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CE5D7970-C43A-4E3C-B504-1A6ECE173C52}
+	EndGlobalSection
+EndGlobal
