@@ -37,6 +37,7 @@ if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
 }
 
 // https://vitejs.dev/config/
+// https://vitejs.dev/config/server-options.html
 export default defineConfig({
     plugins: [plugin()],
     resolve: {
@@ -51,8 +52,10 @@ export default defineConfig({
                 secure: false
             }
         },
-        port: 5173,
         strictPort: true,
+        // port: 5173,
+        port: 3131,
+        host: "0.0.0.0",
         https: {
             key: fs.readFileSync(keyFilePath),
             cert: fs.readFileSync(certFilePath),

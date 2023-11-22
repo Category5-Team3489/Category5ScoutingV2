@@ -1,13 +1,16 @@
-var builder = WebApplication.CreateBuilder(args);
+CancellationTokenSource cts = new();
+Console.CancelKeyPress += (s, e) =>
+{
+    cts.Cancel();
+    e.Cancel = true;
+};
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
-
-// Configure the HTTP request pipeline.
 
 var summaries = new[]
 {
@@ -29,7 +32,42 @@ app.MapGet("/weatherforecast", () =>
 
 app.MapFallbackToFile("/index.html");
 
-app.Run();
+_ = app.RunAsync(/*"https://*:12345"*/);
+
+bool isRunning = true;
+bool isBotRunning = false;
+while (isRunning && !cts.IsCancellationRequested)
+{
+    await Task.Delay(100);
+
+    if (Console.KeyAvailable)
+    {
+        continue;
+    }
+
+    var c = Console.ReadKey().KeyChar;
+
+    switch (c)
+    {
+        case 'x':
+            isRunning = false;
+            break;
+        case 'b':
+            if (!isBotRunning)
+            {
+                isBotRunning = true;
+
+                Console.WriteLine("\nStarting bot...");
+
+                _ = Bot.RunAsync();
+            }
+            else
+            {
+                Console.WriteLine("The bot is already running.");
+            }
+            break;
+    }
+}
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {

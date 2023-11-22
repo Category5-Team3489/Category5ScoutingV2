@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import { fetchRetry } from './core/utils';
 
 interface Forecast {
     date: string;
@@ -9,7 +10,7 @@ interface Forecast {
 }
 
 function App() {
-    const [forecasts, setForecasts] = useState<Forecast[]>();
+    const [forecasts, setForecasts] = useState<Forecast[] | undefined>();
 
     useEffect(() => {
         populateWeatherData();
@@ -47,7 +48,7 @@ function App() {
     );
 
     async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
+        const response = await fetchRetry('weatherforecast');
         const data = await response.json();
         setForecasts(data);
     }

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Category5ScoutingV2.Server"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "category5scoutingv2.client", "category5scoutingv2.client\category5scoutingv2.client.esproj", "{9005B312-47B3-4803-848F-AF0D8D53607F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Category5ScoutingV2.Bot", "Category5ScoutingV2.Bot\Category5ScoutingV2.Bot.csproj", "{1AEE7D5D-C9DF-4101-AA29-26D0D6ABCC97}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{9005B312-47B3-4803-848F-AF0D8D53607F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9005B312-47B3-4803-848F-AF0D8D53607F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9005B312-47B3-4803-848F-AF0D8D53607F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1AEE7D5D-C9DF-4101-AA29-26D0D6ABCC97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AEE7D5D-C9DF-4101-AA29-26D0D6ABCC97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AEE7D5D-C9DF-4101-AA29-26D0D6ABCC97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AEE7D5D-C9DF-4101-AA29-26D0D6ABCC97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
