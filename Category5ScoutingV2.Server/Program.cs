@@ -42,7 +42,12 @@ app.MapWeatherForecast();
 
 app.MapFallbackToFile("/index.html");
 
-_ = app.RunAsync(/*"https://*:12345"*/);
+#if DEBUG
+_ = app.RunAsync();
+#endif
+#if !DEBUG
+_ = app.RunAsync("http://*:25561");
+#endif
 #endregion
 
 #region Command System

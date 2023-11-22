@@ -4,16 +4,16 @@ public static class Bot
 {
     internal static readonly TimeSpan InteractivityTimeout = TimeSpan.FromMinutes(15);
     private static readonly string[] StringPrefixes = ["!"];
-    //private const ulong DiscordServerId = 1170064715792269373;
-    private const ulong DiscordServerId = 904118883324137552;
-
-    private static readonly string Token = File.ReadAllText("token.secret");
+    private const ulong DiscordServerId = 1170064715792269373;
+    //private const ulong DiscordServerId = 904118883324137552;
 
     public static async Task RunAsync()
     {
+        var token = File.ReadAllText("token.secret");
+
         var discord = new DiscordClient(new DiscordConfiguration()
         {
-            Token = Token,
+            Token = token,
             TokenType = TokenType.Bot,
             Intents = DiscordIntents.All,
             MinimumLogLevel = LogLevel.Information
