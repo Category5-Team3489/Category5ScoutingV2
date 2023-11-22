@@ -5,6 +5,24 @@ Console.CancelKeyPress += (s, e) =>
     e.Cancel = true;
 };
 
+bool isBotRunning = false;
+void startBot()
+{
+    if (isBotRunning)
+    {
+        Console.WriteLine("The bot is already running.");
+        return;
+    }
+
+    isBotRunning = true;
+    Console.WriteLine("Starting bot...");
+    _ = Bot.RunAsync();
+}
+
+#if !DEBUG
+startBot();
+#endif
+
 var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
@@ -35,7 +53,6 @@ app.MapFallbackToFile("/index.html");
 _ = app.RunAsync(/*"https://*:12345"*/);
 
 bool isRunning = true;
-bool isBotRunning = false;
 while (isRunning && !cts.IsCancellationRequested)
 {
     await Task.Delay(100);
@@ -46,6 +63,7 @@ while (isRunning && !cts.IsCancellationRequested)
     }
 
     var c = Console.ReadKey().KeyChar;
+    Console.WriteLine();
 
     switch (c)
     {
@@ -53,18 +71,7 @@ while (isRunning && !cts.IsCancellationRequested)
             isRunning = false;
             break;
         case 'b':
-            if (!isBotRunning)
-            {
-                isBotRunning = true;
-
-                Console.WriteLine("\nStarting bot...");
-
-                _ = Bot.RunAsync();
-            }
-            else
-            {
-                Console.WriteLine("The bot is already running.");
-            }
+            startBot();
             break;
     }
 }
