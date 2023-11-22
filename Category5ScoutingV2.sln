@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Category5ScoutingV2.Server", "Category5ScoutingV2.Server\Category5ScoutingV2.Server.csproj", "{4FFB2D77-FA96-4F90-B0C6-9B465029FA3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Category5ScoutingV2.Server", "Category5ScoutingV2.Server\Category5ScoutingV2.Server.csproj", "{4FFB2D77-FA96-4F90-B0C6-9B465029FA3D}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "category5scoutingv2.client", "category5scoutingv2.client\category5scoutingv2.client.esproj", "{9005B312-47B3-4803-848F-AF0D8D53607F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Category5ScoutingV2.Bot", "Category5ScoutingV2.Bot\Category5ScoutingV2.Bot.csproj", "{1AEE7D5D-C9DF-4101-AA29-26D0D6ABCC97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Category5ScoutingV2.Bot", "Category5ScoutingV2.Bot\Category5ScoutingV2.Bot.csproj", "{1AEE7D5D-C9DF-4101-AA29-26D0D6ABCC97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Category5ScoutingV2.Shared", "Category5ScoutingV2.Shared\Category5ScoutingV2.Shared.csproj", "{13E05246-9500-4F0F-AB01-891041C99F81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Category5ScoutingV2.Tests", "Category5ScoutingV2.Tests\Category5ScoutingV2.Tests.csproj", "{3F716A42-10D4-4EF4-9394-21C4F1FFD456}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +33,14 @@ Global
 		{1AEE7D5D-C9DF-4101-AA29-26D0D6ABCC97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AEE7D5D-C9DF-4101-AA29-26D0D6ABCC97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AEE7D5D-C9DF-4101-AA29-26D0D6ABCC97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13E05246-9500-4F0F-AB01-891041C99F81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13E05246-9500-4F0F-AB01-891041C99F81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13E05246-9500-4F0F-AB01-891041C99F81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13E05246-9500-4F0F-AB01-891041C99F81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F716A42-10D4-4EF4-9394-21C4F1FFD456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F716A42-10D4-4EF4-9394-21C4F1FFD456}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F716A42-10D4-4EF4-9394-21C4F1FFD456}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F716A42-10D4-4EF4-9394-21C4F1FFD456}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

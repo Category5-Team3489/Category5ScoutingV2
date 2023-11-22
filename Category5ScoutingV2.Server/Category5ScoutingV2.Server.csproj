@@ -16,6 +16,7 @@
     <ProjectReference Include="..\category5scoutingv2.client\category5scoutingv2.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\Category5ScoutingV2.Shared\Category5ScoutingV2.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
