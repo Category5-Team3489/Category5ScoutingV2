@@ -7,7 +7,8 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     <SpaRoot>..\category5scoutingv2.client</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
-    <SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl>
+    <!--<SpaProxyServerUrl>https://localhost:5173</SpaProxyServerUrl>-->
+	<SpaProxyServerUrl>https://localhost:3131</SpaProxyServerUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,10 +1,15 @@
+using Category5ScoutingV2.Server;
+
+#region Interrupt Cancel Key
 CancellationTokenSource cts = new();
 Console.CancelKeyPress += (s, e) =>
 {
     cts.Cancel();
     e.Cancel = true;
 };
+#endregion
 
+#region Bot
 bool isBotRunning = false;
 void startBot()
 {
@@ -16,13 +21,16 @@ void startBot()
 
     isBotRunning = true;
     Console.WriteLine("Starting bot...");
+
     _ = Bot.RunAsync();
 }
 
 #if !DEBUG
 startBot();
 #endif
+#endregion
 
+#region ASP.NET
 var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
@@ -30,28 +38,14 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-});
+app.MapWeatherForecast();
 
 app.MapFallbackToFile("/index.html");
 
 _ = app.RunAsync(/*"https://*:12345"*/);
+#endregion
 
+#region Command System
 bool isRunning = true;
 while (isRunning && !cts.IsCancellationRequested)
 {
@@ -75,8 +69,4 @@ while (isRunning && !cts.IsCancellationRequested)
             break;
     }
 }
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+#endregion
