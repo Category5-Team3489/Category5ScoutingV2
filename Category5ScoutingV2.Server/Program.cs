@@ -1,7 +1,7 @@
 
 
 #region Interrupt Cancel Key
-using System.Diagnostics;
+using Category5ScoutingV2.Shared;
 using Category5ScoutingV2.Shared.Datastore;
 
 CancellationTokenSource cts = new();
@@ -13,58 +13,8 @@ Console.CancelKeyPress += (s, e) =>
 #endregion
 
 #region Datastore
-
-Type t = typeof(string);
-string n = t.AssemblyQualifiedName!;
-Console.WriteLine(n);
-Type y = Type.GetType(n)!;
-Console.WriteLine(y);
-
-return;
 var datastore = Datastore.FromJson();
-
-var stopwatch = Stopwatch.StartNew();
-
-const int Iterations = 10_000;
-int processorCount = Environment.ProcessorCount;
-int totalIterations = Iterations * processorCount;
-
-Parallel.For(0, processorCount, new ParallelOptions()
-{
-    MaxDegreeOfParallelism = processorCount,
-}, i =>
-{
-    //Console.WriteLine($"{i}: {Environment.CurrentManagedThreadId}");
-
-    int start = i * Iterations;
-    int end = (i + 1) * Iterations;
-    for (int j = start; j < end; j++)
-    {
-        datastore.Write(DatastoreKey.Unsafe(null, j.ToString()), j);
-    }
-});
-
-//// check by going through sum, use i + i n times formula
-
-//for (int i = 0; i < Iters; i++)
-//{
-//    // 453_992 per / sec
-//    datastore.Write(DatastoreKey.Unsafe(null, i.ToString()), i);
-
-//    // 1067243 per / sec
-//    //datastore.Write(DatastoreKey.Typed<int>(i.ToString()), i);
-//}
-
-stopwatch.Stop();
-Console.WriteLine($"Finished in {stopwatch.Elapsed.TotalSeconds} seconds.");
-Console.WriteLine(totalIterations / stopwatch.Elapsed.TotalSeconds);
-
-//var json = datastore.ToJson();
 #endregion
-
-return;
-#pragma warning disable CS0162 // Unreachable code detected
-_ = 0;
 
 #region Bot
 bool isBotRunning = false;
@@ -79,7 +29,7 @@ void startBot()
     isBotRunning = true;
     Console.WriteLine("Starting bot...");
 
-    _ = Bot.RunAsync();
+    _ = Bot.RunAsync(datastore);
 }
 
 #if !DEBUG
@@ -90,12 +40,24 @@ startBot();
 #region ASP.NET
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSingleton(datastore);
+
 var app = builder.Build();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.MapWeatherForecast();
+
+app.MapGet("/datastore", (Datastore datastore) =>
+{
+    if (datastore.TryRead<string>(Constants.TestKey, out var test))
+    {
+        return $"Value: {test}";
+    }
+
+    return $"404";
+});
 
 app.MapFallbackToFile("/index.html");
 
@@ -113,7 +75,11 @@ while (isRunning && !cts.IsCancellationRequested)
 {
     await Task.Delay(100);
 
-    if (Console.KeyAvailable)
+    {
+        datastore.Write(Constants.TestKey, DateTime.Now.ToString());
+    }
+
+    if (!Console.KeyAvailable)
     {
         continue;
     }

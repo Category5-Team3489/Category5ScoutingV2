@@ -23,7 +23,7 @@ public readonly struct DatastoreKey
     public static DatastoreKey Typed<T>(params string[] args) => new(typeof(T), args);
     public static DatastoreKey Untyped(params string[] args) => new(null, args);
 
-    public static DatastoreKey Unsafe(Type? type, string key) => new(type, key);
+    //public static DatastoreKey Unsafe(Type? type, string key) => new(type, key);
 
     public DatastoreKey AsTyped<T>() => new(typeof(T), Key);
     public DatastoreKey AsUntyped() => new(null, Key);
@@ -50,7 +50,7 @@ public readonly struct DatastoreKey
     {
         if (type is not null)
         {
-            this.type = DatastoreTypeUtils.StripNullableValueType(type);
+            this.type = NullableValueType.Strip(type);
         }
 
         this.key = key;
@@ -60,7 +60,7 @@ public readonly struct DatastoreKey
     {
         if (type is not null)
         {
-            this.type = DatastoreTypeUtils.StripNullableValueType(type);
+            this.type = NullableValueType.Strip(type);
         }
 
         if (args.Length == 0)

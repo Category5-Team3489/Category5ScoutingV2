@@ -7,13 +7,33 @@ namespace Category5ScoutingV2.Bot.Commands;
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 public class SlashCommands : ApplicationCommandModule
 {
-    [SlashCommand("testa", "A slash command made to test the DSharpPlusSlashCommands library!")]
-    public async Task TestCommand(InteractionContext ctx)
+    [SlashCommand("time", "A slash command made to test the DSharpPlusSlashCommands library!")]
+    public async Task TestCommand(InteractionContext ctx, Optional<Datastore> datastore)
     {
+        if (!datastore.HasValue)
+        {
+            await ctx.CreateResponseAsync(
+                InteractionResponseType.ChannelMessageWithSource,
+                new DiscordInteractionResponseBuilder().WithContent("Datastore not found!")
+            );
+            return;
+        }
+
+        string response;
+
+        if (datastore.Value.TryRead<string>(Constants.TestKey, out var time))
+        {
+            response = time;
+        }
+        else
+        {
+            response = "Time not found";
+        }
+
         //await ctx.DeferAsync(true);
         await ctx.CreateResponseAsync(
             InteractionResponseType.ChannelMessageWithSource,
-            new DiscordInteractionResponseBuilder().WithContent("Success!")
+            new DiscordInteractionResponseBuilder().WithContent(response)
         );
     }
 

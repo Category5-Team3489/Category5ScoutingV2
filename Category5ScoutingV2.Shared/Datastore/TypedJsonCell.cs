@@ -1,8 +1,10 @@
-﻿namespace Category5ScoutingV2.Shared.Datastore;
+﻿using Category5ScoutingV2.Shared.Datastore.Utils;
+
+namespace Category5ScoutingV2.Shared.Datastore;
 
 internal class TypedJsonCell(Type type, string json)
 {
-    private readonly Type type = DatastoreTypeUtils.StripNullableValueType(type);
+    private readonly Type type = NullableValueType.Strip(type);
     private volatile string json = json;
 
     public static TypedJsonCell FromValue<T>(T value)
@@ -39,7 +41,7 @@ internal class TypedJsonCell(Type type, string json)
     /// <exception cref="DatastoreTypeMismatchException"></exception>
     private void ThrowOnTypeMismatch<T>(DatastoreKey key)
     {
-        Type given = DatastoreTypeUtils.StripNullableValueType(typeof(T));
+        Type given = NullableValueType.Strip(typeof(T));
         if (given != type)
         {
             throw new DatastoreTypeMismatchException(type, given, key);

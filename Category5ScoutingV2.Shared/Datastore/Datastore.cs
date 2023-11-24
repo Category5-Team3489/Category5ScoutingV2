@@ -1,4 +1,6 @@
-﻿namespace Category5ScoutingV2.Shared.Datastore;
+﻿using Category5ScoutingV2.Shared.Datastore.Serialization;
+
+namespace Category5ScoutingV2.Shared.Datastore;
 
 public class Datastore
 {
@@ -18,17 +20,16 @@ public class Datastore
             return new([]);
         }
 
-        var serializedDatastore = SerializedDatastore.FromJson(json);
-        Dictionary<string, Type> typeCache = [];
-        var data = serializedDatastore.SerializedKvps.Select(kvp => kvp.ToKvp(typeCache)).ToList();
+        var serializedDatastore = DatastoreRecord.FromJson(json);
+        var data = serializedDatastore.SerializedKvps.Select(kvp => kvp.ToKvp()).ToList();
         return new(data);
     }
 
     public string ToJson()
     {
         var dataCopy = data.ToArray();
-        var serializedKvps = dataCopy.Select(SerializedDatastoreKeyValuePair.FromKvp).ToList();
-        return new SerializedDatastore(serializedKvps).ToJson();
+        var serializedKvps = dataCopy.Select(DatastoreKvpRecord.FromKvp).ToList();
+        return new DatastoreRecord(serializedKvps).ToJson();
     }
 
     /// <exception cref="DatastoreKeyTypeMismatchException"></exception>

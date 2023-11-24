@@ -1,4 +1,6 @@
 ﻿global using Category5ScoutingV2.Bot.Commands;
+global using Category5ScoutingV2.Shared;
+global using Category5ScoutingV2.Shared.Datastore;
 global using DSharpPlus;
 global using DSharpPlus.CommandsNext;
 global using DSharpPlus.CommandsNext.Attributes;
