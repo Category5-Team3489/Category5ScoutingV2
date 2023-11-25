@@ -9,7 +9,7 @@ interface Forecast {
     summary: string;
 }
 
-export default function App() {
+export default function WeatherForecast() {
     const [forecasts, setForecasts] = useState<Forecast[] | undefined>();
 
     useEffect(() => {

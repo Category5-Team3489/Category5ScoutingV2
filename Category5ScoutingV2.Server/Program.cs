@@ -37,6 +37,11 @@ startBot();
 #endif
 #endregion
 
+//// TODO Remove
+//startBot();
+//await Task.Delay(-1);
+//return;
+
 #region ASP.NET
 var builder = WebApplication.CreateBuilder(args);
 

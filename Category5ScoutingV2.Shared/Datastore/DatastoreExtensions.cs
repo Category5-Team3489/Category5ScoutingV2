@@ -2,7 +2,7 @@
 
 public static class DatastoreExtensions
 {
-    // TODO Redo
+    // TODO Redo datastore extensions as needed
 
     //public static bool TryRead<T>(this Datastore datastore, DatastoreKey key, [MaybeNullWhen(false)] out T value)
     //{

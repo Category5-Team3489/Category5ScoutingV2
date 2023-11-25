@@ -4,10 +4,77 @@
 //#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 public class GeneralModule : BaseCommandModule
 {
-    [Command("hello")]
+    [Command("quals")]
+    public async Task Quals(CommandContext ctx)
+    {
+        var msg = await new DiscordMessageBuilder()
+    .WithEmbed(new DiscordEmbedBuilder()
+        .WithColor(DiscordColor.Green)
+        .WithAuthor("AUTHOR")
+        .WithTitle("TITLE")
+        .WithFooter("FOOTER")
+    )
+    .AddComponents(new DiscordComponent[]
+    {
+                new DiscordButtonComponent(ButtonStyle.Primary, "1", "Match-by-match")
+    })
+    .WithReply(ctx.Message.Id, true)
+    .SendAsync(ctx.Channel);
+
+        var interact = ctx.Client.GetInteractivity();
+
+        var result = await interact.WaitForButtonAsync(msg, ctx.User);
+        if (result.TimedOut)
+        {
+            await ctx.RespondAsync("Timeout");
+        }
+        else
+        {
+            //await ctx.RespondAsync($"You pressed button {result.Result.Id}");
+
+            await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, GetEventCreateModal());
+        }
+
+        await msg.DeleteAsync();
+    }
+
+    [Command("tags")]
     public async Task Hello(CommandContext ctx)
     {
-        await ctx.RespondAsync("Hello, World!");
+        List<DiscordSelectComponentOption> options = Constants.DiscordTeamTags.Select(t => t.ToComponentOption(ctx.Client)).ToList();
+
+        //{
+        //    new DiscordSelectComponentOption(
+        //        "Label, no description",
+        //        "label_no_desc"),
+
+        //    new DiscordSelectComponentOption(
+        //        "Label, Description",
+        //        "label_with_desc",
+        //        "This is a description!"),
+
+        //    new DiscordSelectComponentOption(
+        //        "Label, Description, Emoji",
+        //        "label_with_desc_emoji",
+        //        "This is a description!",
+        //        emoji: new DiscordComponentEmoji(854260064906117121)),
+
+        //    new DiscordSelectComponentOption(
+        //        "Label, Description, Emoji (Default)",
+        //        "label_with_desc_emoji_default",
+        //        "This is a description!",
+        //        isDefault: true,
+        //        new DiscordComponentEmoji(854260064906117121))
+        //};
+
+        // Make the dropdown
+        var dropdown = new DiscordSelectComponent("dropdown", null, options, false, 1, options.Count);
+
+        var builder = new DiscordMessageBuilder()
+    .WithContent("Look, it's a dropdown!")
+        .AddComponents(dropdown);
+
+        await ctx.RespondAsync(builder);
     }
 
     [Command("modal")]

@@ -2,11 +2,12 @@ import { Container } from 'react-bootstrap';
 import WeatherForecast from './pages/WeatherForecast';
 import Menu from './components/Menu';
 import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
 
 const GetRoutes = () => [
     {
         index: true,
-        element: <h2>Hello, World!</h2>
+        element: <Home />
     },
     {
         path: "/weather-forecast",

@@ -4,8 +4,8 @@ public static class Bot
 {
     internal static readonly TimeSpan InteractivityTimeout = TimeSpan.FromMinutes(15);
     private static readonly string[] StringPrefixes = ["!"];
-    //private const ulong DiscordServerId = 1170064715792269373;
-    private const ulong DiscordServerId = 904118883324137552;
+    private const ulong DiscordServerId = 1170064715792269373;
+    //private const ulong DiscordServerId = 904118883324137552;
 
     public static async Task RunAsync(Datastore datastore)
     {
