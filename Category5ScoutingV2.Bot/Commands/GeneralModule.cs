@@ -16,7 +16,7 @@ public class GeneralModule : BaseCommandModule
     )
     .AddComponents(new DiscordComponent[]
     {
-                new DiscordButtonComponent(ButtonStyle.Primary, "1", "Match-by-match")
+        new DiscordButtonComponent(ButtonStyle.Primary, "1", "Match-by-match")
     })
     .WithReply(ctx.Message.Id, true)
     .SendAsync(ctx.Channel);
