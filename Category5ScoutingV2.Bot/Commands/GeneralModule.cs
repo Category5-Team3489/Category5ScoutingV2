@@ -59,7 +59,7 @@ public class GeneralModule : BaseCommandModule
                         modal = CreateTestingModal();
                         break;
                     case "Teleop":
-                        modal = CreateTestingModal();
+                        modal = Teleop1.CreateModal();
                         break;
                 }
 
