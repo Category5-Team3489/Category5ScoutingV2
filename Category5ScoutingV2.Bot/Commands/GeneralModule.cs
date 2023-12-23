@@ -1,4 +1,9 @@
-﻿namespace Category5ScoutingV2.Bot.Commands;
+﻿using Category5ScoutingV2.Bot.Modals;
+
+namespace Category5ScoutingV2.Bot.Commands;
+
+// TODO Make modal buttons persistant
+
 
 #pragma warning disable CA1822 // Mark members as static
 //#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -6,6 +11,70 @@ public class GeneralModule : BaseCommandModule
 {
     [Command("quals")]
     public async Task Quals(CommandContext ctx)
+    {
+        var msg = await new DiscordMessageBuilder()
+            .WithEmbed(new DiscordEmbedBuilder()
+                .WithColor(DiscordColor.Green)
+                .WithAuthor("AUTHOR")
+                .WithTitle("TITLE")
+                .WithFooter("FOOTER")
+            )
+            .AddComponents(new DiscordComponent[]
+            {
+                new DiscordButtonComponent(ButtonStyle.Primary, "MatchByMatch", "Match-by-match"),
+                new DiscordButtonComponent(ButtonStyle.Danger, "Auto1", "Auto 1"),
+                new DiscordButtonComponent(ButtonStyle.Danger, "Auto2", "Auto 2"),
+                new DiscordButtonComponent(ButtonStyle.Success, "Teleop", "Teleop")
+            })
+            .WithReply(ctx.Message.Id, true)
+            .SendAsync(ctx.Channel);
+
+        var interact = ctx.Client.GetInteractivity();
+
+        while (true)
+        {
+            var result = await interact.WaitForButtonAsync(msg, ctx.User);
+            if (result.TimedOut)
+            {
+                //await ctx.RespondAsync("Timeout");
+                await msg.DeleteAsync();
+                break;
+            }
+            else
+            {
+                //await ctx.RespondAsync($"You pressed button {result.Result.Id}");
+
+                DiscordInteractionResponseBuilder? modal = null;
+
+                string buttonId = result.Result.Id;
+                switch (buttonId)
+                {
+                    case "MatchByMatch":
+                        modal = MatchByMatch.CreateModal();
+                        break;
+                    case "Auto1":
+                        modal = CreateTestingModal();
+                        break;
+                    case "Auto2":
+                        modal = CreateTestingModal();
+                        break;
+                    case "Teleop":
+                        modal = CreateTestingModal();
+                        break;
+                }
+
+                if (modal != null)
+                {
+                    await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, modal);
+                }
+            }
+        }
+
+        //await msg.DeleteAsync();
+    }
+
+    [Command("test")]
+    public async Task Test(CommandContext ctx)
     {
         var msg = await new DiscordMessageBuilder()
     .WithEmbed(new DiscordEmbedBuilder()
@@ -16,7 +85,7 @@ public class GeneralModule : BaseCommandModule
     )
     .AddComponents(new DiscordComponent[]
     {
-        new DiscordButtonComponent(ButtonStyle.Primary, "1", "Match-by-match")
+        new DiscordButtonComponent(ButtonStyle.Primary, "1", "Test")
     })
     .WithReply(ctx.Message.Id, true)
     .SendAsync(ctx.Channel);
@@ -32,7 +101,7 @@ public class GeneralModule : BaseCommandModule
         {
             //await ctx.RespondAsync($"You pressed button {result.Result.Id}");
 
-            await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, GetEventCreateModal());
+            await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, MatchByMatch.CreateModal());
         }
 
         await msg.DeleteAsync();
@@ -99,20 +168,52 @@ public class GeneralModule : BaseCommandModule
 
         var interact = ctx.Client.GetInteractivity();
 
-        var result = await interact.WaitForButtonAsync(msg, ctx.User);
-        if (result.TimedOut)
+        for (int i = 0; i < 10; i++)
         {
-            await ctx.RespondAsync("Timeout");
-        }
-        else
-        {
-            //await ctx.RespondAsync($"You pressed button {result.Result.Id}");
+            var result = await interact.WaitForButtonAsync(msg, ctx.User);
+            if (result.TimedOut)
+            {
+                await ctx.RespondAsync("Timeout");
+            }
+            else
+            {
+                //await ctx.RespondAsync($"You pressed button {result.Result.Id}");
 
-            await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, GetEventCreateModal());
+                await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, GetEventCreateModal());
+            }
         }
 
         await msg.DeleteAsync();
     }
+
+    private static DiscordInteractionResponseBuilder CreateTestingModal()
+    {
+        return new DiscordInteractionResponseBuilder()
+            .WithCustomId("auto-1_modal")
+            .WithTitle("Auto 1")
+            .AddComponents(new TextInputComponent(
+                label: "Text box 1",
+                customId: "1",
+                placeholder: "Type your notes here",
+                required: true,
+                style: TextInputStyle.Paragraph
+            ))
+            .AddComponents(new TextInputComponent(
+                label: "Text box 2",
+                customId: "2",
+                placeholder: "Type your notes here",
+                required: true,
+                style: TextInputStyle.Paragraph
+            ))
+            .AddComponents(new TextInputComponent(
+                label: "Text box 3",
+                customId: "3",
+                placeholder: "Type your notes here",
+                required: true,
+                style: TextInputStyle.Paragraph
+            ));
+    }
+
 
     private static DiscordInteractionResponseBuilder GetEventCreateModal()
     {
