@@ -6,7 +6,7 @@ public static class Teleop1
     public static DiscordInteractionResponseBuilder CreateModal()
     {
         return new DiscordInteractionResponseBuilder()
-            .WithCustomId("Teleop-modal")
+            .WithCustomId("TeleOp1-modal")
             .WithTitle("TeleOp-1")
             .AddComponents(new TextInputComponent(
                 label: "Instructions (DO NOT EDIT!)",

@@ -22,9 +22,10 @@ public class GeneralModule : BaseCommandModule
             .AddComponents(new DiscordComponent[]
             {
                 new DiscordButtonComponent(ButtonStyle.Primary, "MatchByMatch", "Match-by-match"),
-                new DiscordButtonComponent(ButtonStyle.Danger, "Auto1", "Auto 1"),
-                new DiscordButtonComponent(ButtonStyle.Danger, "Auto2", "Auto 2"),
-                new DiscordButtonComponent(ButtonStyle.Success, "Teleop", "Teleop")
+                new DiscordButtonComponent(ButtonStyle.Danger, "Auto", "Auto"),
+                new DiscordButtonComponent(ButtonStyle.Success, "Teleop 1", "Teleop 1"),
+                new DiscordButtonComponent(ButtonStyle.Success, "Teleop 2", "Teleop 2"),
+                new DiscordButtonComponent(ButtonStyle.Secondary, "Endgame", "Endgame"),
             })
             .WithReply(ctx.Message.Id, true)
             .SendAsync(ctx.Channel);
@@ -52,14 +53,17 @@ public class GeneralModule : BaseCommandModule
                     case "MatchByMatch":
                         modal = MatchByMatch.CreateModal();
                         break;
-                    case "Auto1":
-                        modal = CreateTestingModal();
+                    case "Auto":
+                        modal = Auto.CreateModal();
                         break;
-                    case "Auto2":
-                        modal = CreateTestingModal();
+                    case "Teleop 2":
+                        modal = Teleop2.CreateModal();
                         break;
-                    case "Teleop":
+                    case "Teleop 1":
                         modal = Teleop1.CreateModal();
+                        break;
+                    case "Endgame":
+                        modal = Endgame.CreateModal();
                         break;
                 }
 
