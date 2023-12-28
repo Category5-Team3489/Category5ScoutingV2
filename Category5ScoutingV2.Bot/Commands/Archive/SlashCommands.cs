@@ -1,6 +1,6 @@
 ﻿// https://dsharpplus.github.io/DSharpPlus/articles/slash_commands.html
 
-namespace Category5ScoutingV2.Bot.Commands;
+namespace Category5ScoutingV2.Bot.Commands.Archive;
 
 #pragma warning disable IDE0060 // Remove unused parameter
 #pragma warning disable CA1822 // Mark members as static

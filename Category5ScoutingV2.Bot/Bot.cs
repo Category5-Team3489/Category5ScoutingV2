@@ -1,4 +1,6 @@
-﻿namespace Category5ScoutingV2.Bot;
+﻿using Category5ScoutingV2.Bot.Commands.Archive;
+
+namespace Category5ScoutingV2.Bot;
 
 public static class Bot
 {
@@ -32,6 +34,7 @@ public static class Bot
             });
 
             commands.RegisterCommands<GeneralModule>();
+            commands.RegisterCommands<PreModule>();
         }
 
         // Slash

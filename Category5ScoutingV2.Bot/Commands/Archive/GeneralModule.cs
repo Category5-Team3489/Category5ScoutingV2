@@ -1,6 +1,6 @@
 ﻿using Category5ScoutingV2.Bot.Modals;
 
-namespace Category5ScoutingV2.Bot.Commands;
+namespace Category5ScoutingV2.Bot.Commands.Archive;
 
 // TODO Make modal buttons persistant
 
