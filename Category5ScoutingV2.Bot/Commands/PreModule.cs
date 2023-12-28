@@ -1,4 +1,6 @@
-﻿namespace Category5ScoutingV2.Bot.Commands;
+﻿using Category5ScoutingV2.Bot.Modals;
+
+namespace Category5ScoutingV2.Bot.Commands;
 
 #pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable CA1822 // Mark members as static
