@@ -5,9 +5,9 @@ public record DiscordTeamTag(string Label, string EmojiName)
     public DiscordSelectComponentOption ToComponentOption(DiscordClient client)
     {
         return new DiscordSelectComponentOption(
-                Label,
-                Label,
-                emoji: new DiscordComponentEmoji(DiscordEmoji.FromName(client, EmojiName))
+            label: Label,
+            value: Label,
+            emoji: new DiscordComponentEmoji(DiscordEmoji.FromName(client, EmojiName))
         );
     }
 }

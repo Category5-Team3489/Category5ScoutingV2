@@ -1,6 +1,4 @@
-﻿using Category5ScoutingV2.Shared.Datastore.Utils;
-
-namespace Category5ScoutingV2.Shared.Datastore;
+﻿namespace Category5ScoutingV2.Shared.Datastore;
 
 internal class TypedJsonCell(Type type, string json)
 {
