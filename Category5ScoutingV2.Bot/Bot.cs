@@ -30,7 +30,8 @@ public static class Bot
             var commands = discord.UseCommandsNext(new CommandsNextConfiguration()
             {
                 StringPrefixes = StringPrefixes,
-                Services = services
+                Services = services,
+                EnableDms = false,
             });
 
             commands.RegisterCommands<GeneralModule>();
