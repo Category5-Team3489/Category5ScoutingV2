@@ -16,7 +16,7 @@ public static class Social
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "How has their drive team or pit crew changed from last year.",
+                label: "How has their drive team or pit crew changed.",
                 customId: "Social-1-modal",
                 placeholder: "Blank",
                 required: true,
@@ -30,14 +30,14 @@ public static class Social
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "How did their past season go? Was it sucessful or not sucessful in their eyes?",
+                label: "How has their past season gone?",
                 customId: "Social-3-modal",
                 placeholder: "Blank",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "How friendly is their team? Are they approchable and friendly in your eyes?",
+                label: "How friendly and approchable is their team?",
                 customId: "Social-4-modal",
                 placeholder: "Blank",
                 required: true,

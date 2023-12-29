@@ -16,28 +16,28 @@ public static class GameComposition
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "What is the auto of this robot. Are their special features that they mentioned",
+                label: "What is the auto of this robot.",
                 customId: "Comp-1-modal",
                 placeholder: "Blank",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "How many autos does the robot has. What is the different positions, scoring, and general changes each auto has.",
+                label: "How many autos does the robot has and auto positions.",
                 customId: "Comp-2-modal",
                 placeholder: "Blank",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "What is the robots past sucess or failures. How consistent is the robot at it's strengths and weaknesses.",
+                label: "What is the robots past sucess or failures.",
                 customId: "Comp-3-modal",
                 placeholder: "Blank",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "What is the robots cycle time compared to other robots. ",
+                label: "What is the robots cycle time.",
                 customId: "Comp-4-modal",
                 placeholder: "Blank",
                 required: true,

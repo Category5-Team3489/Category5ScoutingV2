@@ -56,7 +56,7 @@ public class PitModule : BaseCommandModule
                     case "Design":
                         modal = Design.CreateModal();
                         break;
-                    case "Game Composition":
+                    case "Game-Comp":
                         modal = GameComposition.CreateModal();
                         break;
                     case "Social":

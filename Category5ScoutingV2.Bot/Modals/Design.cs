@@ -16,21 +16,21 @@ public static class Design
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "What is the robots Chassis design. Why did this team pick this Chassis and its main benefit",
+                label: "What is the robots Chassis design.",
                 customId: "Design-1-modal",
                 placeholder: "Blank",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "What is the robots Arm/Intake design. How consistent has it proven to be. What does it grab.",
+                label: "What is the robots Arm/Intake design.",
                 customId: "Design-2-modal",
                 placeholder: "Blank",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "What is the general speed, weight, size,height compared to other robots.",
+                label: "What is the speed, weight, size.",
                 customId: "Design-3-modal",
                 placeholder: "Blank",
                 required: true,

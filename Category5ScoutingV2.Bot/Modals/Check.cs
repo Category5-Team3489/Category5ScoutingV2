@@ -18,28 +18,28 @@ public static class Check
             .AddComponents(new TextInputComponent(
                 label: "Chassis, Arm design, Intake, Weight, Speed.etc",
                 customId: "Check-1-modal",
-                placeholder: "Check off Phyical robot design aspects and functions",
+                value: "Check off Phyical robot design aspects and functions",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Auto, Auto scoring, Auto pickup, Auto positions, Number of Autos, Auto sucess rate",
-                customId: "Chech-2-modal",
-                placeholder: "Check off all the different auto related aspects the robot does",
+                label: "Auto scoring, Auto pickup, Auto positions, # of Autos",
+                customId: "Check-2-modal",
+                value: "Check off all the different auto related aspects the robot does",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Greeting, Offseason, Past events, Off topic moments, Not Robot, Team friendlyness, fav robo part",
+                label: "Offseason, Past event, Friendlyness, fav robo part",
                 customId: "Check-3-modal",
-                placeholder: "Suggestions of possible more friendly things to talk to teams about.",
+                value: "Suggestions of possible more friendly things to talk to teams about.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Cycle time, relative speed, Endgame history, Game sucess history, scoring consistentcy, ",
+                label: "Cycle time, speed, Endgame, Game history, scoring",
                 customId: "Check-4-modal",
-                placeholder: "Check off game related qeustions that get an idea of teams performence",
+                value: "Check off game related qeustions that get an idea of teams performence",
                 required: true,
                 style: TextInputStyle.Paragraph
             ));
