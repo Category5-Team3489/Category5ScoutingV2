@@ -11,12 +11,12 @@ public static class Social
             .AddComponents(new TextInputComponent(
                 label: "Instructions (DO NOT EDIT!)",
                 customId: "Social-instructions-modal",
-                value: "This should be used to answer qeustions indef with as much detail told. Use the Check Label to help rember things said by the other team.",
+                value: "This should be used to answer questions with as much detail possible. Use the Check Label to help remember things said by the other team.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "How has their drive team or pit crew changed.",
+                label: "How has their drive team/pit crew changed.",
                 customId: "Social-1-modal",
                 placeholder: "Blank",
                 required: true,
@@ -30,7 +30,7 @@ public static class Social
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "How has their past season gone?",
+                label: "How had their past season gone?",
                 customId: "Social-3-modal",
                 placeholder: "Blank",
                 required: true,

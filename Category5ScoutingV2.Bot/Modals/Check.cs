@@ -16,30 +16,30 @@ public static class Check
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Chassis, Arm design, Intake, Weight, Speed.etc",
+                label: "Chassis, Arm design, Intake, Weight, Speed",
                 customId: "Check-1-modal",
-                value: "Check off Phyical robot design aspects and functions",
+                placeholder: "Check off Phyical robot design aspects and functions",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Auto scoring, Auto pickup, Auto positions, # of Autos",
+                label: "Auto scoring,pickup,positions, #",
                 customId: "Check-2-modal",
-                value: "Check off all the different auto related aspects the robot does",
+                placeholder: "Check off all the different auto related aspects the robot does",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Offseason, Past event, Friendlyness, fav robo part",
+                label: "Offseason, Past event, Fav part robo",
                 customId: "Check-3-modal",
-                value: "Suggestions of possible more friendly things to talk to teams about.",
+                placeholder: "Suggestions of possible more friendly things to talk to teams about.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Cycle time, speed, Endgame, Game history, scoring",
+                label: "Cycle, Endgame, Game history, scoring",
                 customId: "Check-4-modal",
-                value: "Check off game related qeustions that get an idea of teams performence",
+                placeholder: "Check off game related qeustions that get an idea of teams performence",
                 required: true,
                 style: TextInputStyle.Paragraph
             ));
