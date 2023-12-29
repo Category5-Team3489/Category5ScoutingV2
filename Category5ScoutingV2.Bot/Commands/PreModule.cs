@@ -22,11 +22,9 @@ public class PreModule : BaseCommandModule
             )
             .AddComponents(new DiscordComponent[]
             {
-                new DiscordButtonComponent(ButtonStyle.Primary, "MatchByMatch", "Match-by-match"),
-                new DiscordButtonComponent(ButtonStyle.Danger, "Auto", "Auto"),
-                new DiscordButtonComponent(ButtonStyle.Success, "Teleop 1", "Teleop 1"),
-                new DiscordButtonComponent(ButtonStyle.Success, "Teleop 2", "Teleop 2"),
-                new DiscordButtonComponent(ButtonStyle.Secondary, "Endgame", "Endgame"),
+                new DiscordButtonComponent(ButtonStyle.Success, "Predict", "Predict"),
+                new DiscordButtonComponent(ButtonStyle.Danger, "Strategy", "Strategy"),
+
             })
             .WithReply(ctx.Message.Id, true)
             .SendAsync(ctx.Channel);
@@ -51,20 +49,11 @@ public class PreModule : BaseCommandModule
                 string buttonId = result.Result.Id;
                 switch (buttonId)
                 {
-                    case "MatchByMatch":
-                        modal = MatchByMatch.CreateModal();
+                    case "Predict":
+                        modal = Predict.CreateModal();
                         break;
-                    case "Auto":
-                        modal = Auto.CreateModal();
-                        break;
-                    case "Teleop 2":
-                        modal = Teleop2.CreateModal();
-                        break;
-                    case "Teleop 1":
-                        modal = Teleop1.CreateModal();
-                        break;
-                    case "Endgame":
-                        modal = Endgame.CreateModal();
+                    case "Strategy":
+                        modal = Strategy.CreateModal();
                         break;
                 }
 
