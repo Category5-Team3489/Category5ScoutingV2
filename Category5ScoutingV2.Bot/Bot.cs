@@ -36,6 +36,7 @@ public static class Bot
 
             commands.RegisterCommands<GeneralModule>();
             commands.RegisterCommands<PreModule>();
+            commands.RegisterCommands<PitModule>();
         }
 
         // Slash

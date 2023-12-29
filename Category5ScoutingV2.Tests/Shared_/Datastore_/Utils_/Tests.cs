@@ -2,7 +2,7 @@
 using Category5ScoutingV2.Shared.Datastore;
 using Category5ScoutingV2.Shared.Datastore.Utils;
 
-namespace Category5ScoutingV2.Tests.Shared_Tests.Datastore_Tests.Utils_Tests;
+namespace Category5ScoutingV2.Tests.Shared_.Datastore_.Utils_;
 
 [TestClass]
 public class Tests

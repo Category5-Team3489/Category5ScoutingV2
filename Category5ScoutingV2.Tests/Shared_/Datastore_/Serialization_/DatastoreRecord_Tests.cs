@@ -1,6 +1,6 @@
 ﻿using Category5ScoutingV2.Shared.Datastore.Serialization;
 
-namespace Category5ScoutingV2.Tests.Shared_Tests.Datastore_Tests.Serialization_Tests;
+namespace Category5ScoutingV2.Tests.Shared_.Datastore_.Serialization_;
 
 [TestClass]
 public class DatastoreRecord_Tests

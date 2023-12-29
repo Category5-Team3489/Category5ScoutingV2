@@ -39,10 +39,10 @@ internal class TypedJsonCell(Type type, string json)
     /// <exception cref="DatastoreTypeMismatchException"></exception>
     private void ThrowOnTypeMismatch<T>(DatastoreKey key)
     {
-        Type given = NullableValueType.Strip(typeof(T));
-        if (given != type)
+        Type givenType = NullableValueType.Strip(typeof(T));
+        if (givenType != type)
         {
-            throw new DatastoreTypeMismatchException(type, given, key);
+            throw new DatastoreTypeMismatchException(type, givenType, key);
         }
     }
 

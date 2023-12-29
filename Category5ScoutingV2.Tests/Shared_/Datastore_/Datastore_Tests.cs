@@ -1,6 +1,6 @@
 using Category5ScoutingV2.Shared.Datastore;
 
-namespace Category5ScoutingV2.Tests.Shared_Tests.Datastore_Tests;
+namespace Category5ScoutingV2.Tests.Shared_.Datastore_;
 
 [TestClass]
 public class Datastore_Tests

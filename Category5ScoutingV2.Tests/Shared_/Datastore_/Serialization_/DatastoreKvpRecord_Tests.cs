@@ -1,10 +1,10 @@
 ﻿using Category5ScoutingV2.Shared.Datastore.Serialization;
 using Category5ScoutingV2.Shared.Datastore.Utils;
 
-namespace Category5ScoutingV2.Tests.Shared_Tests.Datastore_Tests.Serialization_Tests;
+namespace Category5ScoutingV2.Tests.Shared_.Datastore_.Serialization_;
 
 [TestClass]
-public class DatastoreKvpRecord_Tests
+public class DatastoreKvpRecord_
 {
     [TestMethod]
     public void FromAndToKvp()

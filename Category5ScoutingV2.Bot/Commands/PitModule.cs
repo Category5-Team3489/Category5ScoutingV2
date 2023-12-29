@@ -11,6 +11,8 @@ public class PitModule : BaseCommandModule
     [Command("pit")]
     public async Task Pit(CommandContext ctx, int teamNumber)
     {
+        // Buttons: Quick Notes, Teleop 1, Teleop 2, Auto 1
+
         var msg = await new DiscordMessageBuilder()
             .WithEmbed(new DiscordEmbedBuilder()
                 .WithColor(DiscordColor.Green)
