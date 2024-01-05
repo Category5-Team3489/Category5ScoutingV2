@@ -22,8 +22,7 @@ public class FinalsModule : BaseCommandModule
             )
             .AddComponents(new DiscordComponent[]
             {
-                new DiscordButtonComponent(ButtonStyle.Success, "Predict", "Predict"),
-                new DiscordButtonComponent(ButtonStyle.Danger, "Strategy", "Strategy"),
+                new DiscordButtonComponent(ButtonStyle.Success, "Finals", "Finals"),
 
             })
             .WithReply(ctx.Message.Id, true)
@@ -49,11 +48,8 @@ public class FinalsModule : BaseCommandModule
                 string buttonId = result.Result.Id;
                 switch (buttonId)
                 {
-                    case "Predict":
-                        modal = Predict.CreateModal();
-                        break;
-                    case "Strategy":
-                        modal = Strategy.CreateModal();
+                    case "Finals":
+                        modal = Final.CreateModal();
                         break;
                 }
 
