@@ -16,30 +16,26 @@ public static class Check
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Chassis, Arm design, Intake, Weight, Speed",
+                label: "Chassis/Intake/Shooter/Climber/Speed/Arm/Size",
                 customId: "Check-1-modal",
-                placeholder: "Check off Phyical robot design aspects and functions",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Auto scoring,pickup,positions, #",
+                label: "Auto scoring,positions,routes,speaker vs amp",
                 customId: "Check-2-modal",
-                placeholder: "Check off all the different auto related aspects the robot does",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Offseason, Past event, Fav part robo",
+                label: "Cycle,Stage task,Game history,scoring,routes",
                 customId: "Check-3-modal",
-                placeholder: "Suggestions of possible more friendly things to talk to teams about.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Cycle, Endgame, Game history, scoring",
+                label: "Any new drive/pit team? General experience?",
                 customId: "Check-4-modal",
-                placeholder: "Check off game related qeustions that get an idea of teams performence",
                 required: true,
                 style: TextInputStyle.Paragraph
             ));

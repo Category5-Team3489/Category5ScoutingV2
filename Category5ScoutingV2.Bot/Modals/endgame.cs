@@ -16,23 +16,30 @@ public static class Endgame
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Endgame Effectiveness",
+                label: "How/Do they score trap.Do they need to climb?",
                 customId: "Endgame-effectiveness-modal",
-                placeholder: "Determine if the endgame task is completed effectively.",
+                placeholder: "Do they need to climb or score from floor for trap.Consistency?Do they need to be in a certain spot?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Endgame time",
+                label: "What time do they need to climb/score trap?",
                 customId: "Endgame-time-modal",
-                placeholder: "Evaluate transition from Teleop-endgame.",
+                placeholder: "How soon do they need to transition from Teleop to endgame? How long does it take to climb/score?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Endgame Comparison",
+                label: "Single/double/triple climb. How consistent?",
+                customId: "Endgame-time-modal2",
+                placeholder: "How consistently can they climb with multiple robots on average. How do they get past robot's space.",
+                required: true,
+                style: TextInputStyle.Paragraph
+            ))
+            .AddComponents(new TextInputComponent(
+                label: "Room taken up on chain? Why a lot or little?",
                 customId: "Endgame-comparison-modal",
-                placeholder: "Evaluate robot's endgame performence comparatively.",
+                placeholder: "How much room do they leave for other robots to get on chain. Do they always hang in middle.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ));

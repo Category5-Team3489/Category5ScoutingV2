@@ -16,30 +16,30 @@ public static class Design
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "What is the robots Chassis design.",
+                label: "What is the robot’s Chassis design?",
                 customId: "Design-1-modal",
-                placeholder: "Blank",
+                placeholder: "Do they have drive trains like swerve, six wheel, 8 wheel, mecanum, etc. Why did they choose this?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "What is the robots Arm/Intake design.",
+                label: "What is the speed, weight, size, height?",
                 customId: "Design-2-modal",
-                placeholder: "Blank",
+                placeholder: "Describe the more physical attributes of their robot. Use comparisons to make up for non-specific #s",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "What is the speed, weight, size.",
+                label: "Robot arm design, shooter, climber,intake.",
                 customId: "Design-3-modal",
-                placeholder: "Blank",
+                placeholder: "Describe these features using correct terminology. If unknown/unique ask what the team calls it.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "How has the robot changed from last event.",
+                label: "Aditional info",
                 customId: "Design-4-modal",
-                placeholder: "Blank",
+                placeholder: "Post any additional info here",
                 required: true,
                 style: TextInputStyle.Paragraph
             ));

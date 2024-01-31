@@ -1,4 +1,7 @@
-﻿namespace Category5ScoutingV2.Bot.Modals;
+﻿using Microsoft.Extensions.Options;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace Category5ScoutingV2.Bot.Modals;
 
 
 public static class Teleop1
@@ -16,25 +19,33 @@ public static class Teleop1
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Teleop-start",
+                label: "Preference in Speaker or Amp or scores both?",
                 customId: "teleop-start-modal",
-                placeholder: "From the very start do they do something differently vs during the game",
+                placeholder: "If a robot scores both in Amp and in Speaker explain their strategy of when and why they switch.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
              .AddComponents(new TextInputComponent(
-                label: "Teleop-middle",
+                label: "What is the robot’s strategy through Teleop?",
                 customId: "Teleop-middle-modal",
-                placeholder: "Main game plan; What do they do throughtout the main stage of the game?",
+                placeholder: "Explain the decision making process the robot goes through. Any unique decisions?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
              .AddComponents(new TextInputComponent(
-                label: "Teleop-end",
+                label: "General cycle time, routing, and speed.",
                 customId: "Teleop-end-modal",
-                placeholder: "TeleOp-end questions go here",
+                placeholder: "Describe speed and cycle time by comparing it to other robot averages. Be indef about routes.",
+                required: true,
+                style: TextInputStyle.Paragraph
+            ))
+             .AddComponents(new TextInputComponent(
+                label: "Defense, or Scoring bot. Effective at job?",
+                customId: "Teleop-end-modal2",
+                placeholder: "One of the three roles or a combination. Effectiveness at the role comparatively. Switch roles thru?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ));
+
     }
 }

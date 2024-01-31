@@ -16,30 +16,30 @@ public static class Social
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "How has their drive team/pit crew changed.",
+                label: "How is their drive team/pit crew? Changes?",
                 customId: "Social-1-modal",
-                placeholder: "Blank",
+                placeholder: "Mark how their team has changed over seasons. How much previous drive practice was obtained.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Their favorite part of their robot.",
+                label: "Is their team fun,approachable,sociable?",
                 customId: "Social-2-modal",
-                placeholder: "Blank",
+                placeholder: "Important when picking if we want to pitch. Do they have a good relationship with us?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "How had their past season gone?",
+                label: "Notes",
                 customId: "Social-3-modal",
-                placeholder: "Blank",
+                placeholder: "Anything socially important or that could help drive team. Anything that can be used in a pitch.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "How friendly and approchable is their team?",
+                label: "additional info",
                 customId: "Social-4-modal",
-                placeholder: "Blank",
+                placeholder: "Post additional info here",
                 required: true,
                 style: TextInputStyle.Paragraph
             ));

@@ -16,30 +16,30 @@ public static class Predict
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Predict Question 1",
+                label: "Are they going to be in a picking position?",
                 customId: "Predict-1-modal",
-                placeholder: "What rank are they going to be? (Opinion)",
+                placeholder: "This is a spot that allows them to have input on alliance partners. Not just the alliance captain.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Predict Question 2",
+                label: "Predicted first, second, or third pick.",
                 customId: "Predict-2-modal",
-                placeholder: "Are they going to be top 8?",
+                placeholder: "This is the order that the Alliance captain picks each partner. Use robot quality to predict this.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Predict Question 3",
+                label: "Is convincing them to ally with us needed?",
                 customId: "Predict-3-modal",
-                placeholder: "Are they going to be first, secound, or third pick?",
+                placeholder: "We pitch to teams in picking spots we should be allied. Is it valuable for us to pitch to this team?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Predict Question 4",
+                label: "Additional info",
                 customId: "Predict-4-modal",
-                placeholder: "Do we need to convince their team to ally with us?",
+                placeholder: "Post Additional info here",
                 required: true,
                 style: TextInputStyle.Paragraph
             ));

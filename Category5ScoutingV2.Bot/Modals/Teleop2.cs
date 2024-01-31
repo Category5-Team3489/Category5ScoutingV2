@@ -16,23 +16,30 @@ public static class Teleop2
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Other Teleop question 1",
+                label: "Do they consistently get penalty points? How?",
                 customId: "other-teleop-question-1-modal",
-                placeholder: "Answer 1 goes here",
+                placeholder: "How effective is the robot is at avoiding or getting penalties. How do the robots get penalties?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Other Teleop question 2",
+                label: "Do they deal with traffic well or cause it.",
                 customId: "other-teleop-question-2-modal",
-                placeholder: "Answer 2 goes here",
+                placeholder: "How does the robot deal with traffic using strategy or cause it. Do they cause traffic on purpose?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Other Teleop question 3",
+                label: "Is performance affected by physical aspects?",
+                customId: "other-teleop-question-22-modal",
+                placeholder: "How does the robots unique robot attributes hinder or help their performance?Weight,height,speed.etc",
+                required: true,
+                style: TextInputStyle.Paragraph
+            ))
+            .AddComponents(new TextInputComponent(
+                label: "Helpful and actionable notes for drive team",
                 customId: "other-teleop-question-3-modal",
-                placeholder: "Answer 3 goes here",
+                placeholder: "Notes for drive team as a reference .This should make things like Finals easier. Also use as notes.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ));

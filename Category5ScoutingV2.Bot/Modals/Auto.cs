@@ -16,23 +16,30 @@ public static class Auto
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Auto Start",
+                label: "Auto starting position,routing, note order.",
                 customId: "Auto-start-modal",
-                placeholder: "Does their robot do anything in begining?",
+                placeholder: "Use the sub-woofer as reference for auto positions. Note order is the order they pick up and score?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Auto middle",
+                label: "Amp, Speaker, Distances Scored, Consistency?",
                 customId: "Auto-middle-modal",
-                placeholder: "How many things do they go after what things do they go after can they do other things?",
+                placeholder: "Consistency marks how many times auto worked, penalties, or effect alliance members.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
-                label: "Auto End",
+                label: "Unique robot strategies/thoughts in auto?",
                 customId: "Auto-end-modal",
-                placeholder: "Are there end game auto points (balancing)?",
+                placeholder: "Does their auto do anything unique or not? Does their auto do anything strategy related?",
+                required: true,
+                style: TextInputStyle.Paragraph
+            ))
+            .AddComponents(new TextInputComponent(
+                label: "Auto NOTES (not game piece)",
+                customId: "Auto-end1-modal",
+                placeholder: "Add any notes not asked by other boxes and put your opinions. Also any info helpful to drive team.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ));
