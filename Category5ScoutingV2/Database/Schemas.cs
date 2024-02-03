@@ -1,14 +1,14 @@
 ﻿namespace Category5ScoutingV2.Database;
 
-public record struct Team(
+public record Team(
     int TeamNumber,
     string Nickname
 )
 {
-    public readonly string TeamKey => $"frc{TeamNumber}";
+    public string TeamKey => $"frc{TeamNumber}";
 }
 
-public record struct TeamAndEvent(int TeamNumber, string EventKey);
+public record TeamAndEvent(int TeamNumber, string EventKey);
 
 public record Event(
     int Year,
@@ -17,4 +17,4 @@ public record Event(
     Dictionary<TeamAndEvent, Modal> Modals
 );
 
-public record Modal();
+public record Modal(string Key);

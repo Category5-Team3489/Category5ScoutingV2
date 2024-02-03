@@ -26,6 +26,14 @@ string tbaApiKey = db.Op(data => data.TbaApiKey);
 Tba tba = new(tbaApiKey);
 #endregion
 
+db.Op(data =>
+{
+    data.Events.Add(new Event(2024, "2024scand", [], new()
+    {
+        [new TeamAndEvent(3489, "2024scand")] = new Modal("test")
+    }));
+});
+
 await Bot.RunAsync(db, tba);
 
 const double SaveIntervalSeconds = 30;

@@ -6,7 +6,7 @@ public class DbOpTypeException(Type type) : Exception($"Db operation type must b
 
 public class Db
 {
-    private static readonly JsonSerializerOptions JsonSerializerOptions = new()
+    private readonly JsonSerializerOptions jsonSerializerOptions = new()
     {
         WriteIndented = true
     };
@@ -18,12 +18,14 @@ public class Db
 
     public Db(string filePath)
     {
+        jsonSerializerOptions.Converters.Add(new TeamAndEventJsonConverter());
+
         this.filePath = filePath;
 
         try
         {
             string json = File.ReadAllText(filePath);
-            data = JsonSerializer.Deserialize<Data>(json)!;
+            data = JsonSerializer.Deserialize<Data>(json, jsonSerializerOptions)!;
         }
         catch { }
 
@@ -34,7 +36,7 @@ public class Db
     {
         lock (dataLock)
         {
-            string json = JsonSerializer.Serialize(data, JsonSerializerOptions);
+            string json = JsonSerializer.Serialize(data, jsonSerializerOptions);
             File.WriteAllText(filePath, json);
         }
     }
