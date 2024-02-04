@@ -1,12 +1,4 @@
-﻿using Category5ScoutingV2.CommandModules;
-using Category5ScoutingV2.Database;
-using Category5ScoutingV2.TbaApi;
-using DSharpPlus;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.Interactivity;
-using DSharpPlus.Interactivity.Extensions;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+﻿using System.Reflection;
 
 namespace Category5ScoutingV2;
 
@@ -15,10 +7,8 @@ public static class Bot
     private static readonly TimeSpan InteractivityTimeout = TimeSpan.FromMinutes(15);
     private static readonly string[] CommandPrefixes = ["!"];
 
-    public static async Task RunAsync(Db db, Tba tba)
+    public static async Task RunAsync(string token)
     {
-        var token = File.ReadAllText("../../../token.secret");
-
         var discord = new DiscordClient(new DiscordConfiguration()
         {
             Token = token,
@@ -28,9 +18,7 @@ public static class Bot
         });
 
         var services = new ServiceCollection()
-             .AddSingleton(db)
-             .AddSingleton(tba)
-             .BuildServiceProvider();
+            .BuildServiceProvider();
 
         // Init CommandsNext
         {
@@ -41,8 +29,7 @@ public static class Bot
                 EnableDms = false,
             });
 
-            commandsNext.RegisterCommands<ConfigModule>();
-            commandsNext.RegisterCommands<TbaModule>();
+            commandsNext.RegisterCommands(Assembly.GetExecutingAssembly());
         }
 
         // Init SlashCommands

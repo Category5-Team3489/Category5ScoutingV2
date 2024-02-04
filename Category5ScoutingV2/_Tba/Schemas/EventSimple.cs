@@ -1,4 +1,4 @@
-﻿namespace Category5ScoutingV2.TbaApi.Schemas;
+﻿namespace Category5ScoutingV2._Tba.Schemas;
 
 #pragma warning disable IDE1006 // Naming Styles
 

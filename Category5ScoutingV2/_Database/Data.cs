@@ -1,4 +1,12 @@
-﻿namespace Category5ScoutingV2.Database;
+﻿namespace Category5ScoutingV2._Database;
+
+public class Data
+{
+    public string CurrentEventKey { get; set; } = "";
+    public Dictionary<string, Event> Events { get; set; } = [];
+}
+
+public record struct TeamAndEvent(int TeamNumber, string EventKey);
 
 public record Team(
     int TeamNumber,
@@ -7,8 +15,6 @@ public record Team(
 {
     public string TeamKey => $"frc{TeamNumber}";
 }
-
-public record TeamAndEvent(int TeamNumber, string EventKey);
 
 public record Event(
     int Year,

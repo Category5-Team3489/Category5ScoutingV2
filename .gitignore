@@ -396,5 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-*.secret
-Category5ScoutingV2/database.dat
+
+# Custom
+Category5ScoutingV2/database.json
+Category5ScoutingV2/secrets.json

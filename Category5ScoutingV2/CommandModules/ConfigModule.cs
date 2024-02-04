@@ -1,10 +1,4 @@
-﻿using Category5ScoutingV2.Database;
-using Category5ScoutingV2.TbaApi;
-using Category5ScoutingV2.TbaApi.Schemas;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
-
-namespace Category5ScoutingV2.CommandModules;
+﻿namespace Category5ScoutingV2.CommandModules;
 
 #pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable CA1822 // Mark members as static
@@ -13,9 +7,6 @@ namespace Category5ScoutingV2.CommandModules;
 [Group("config")]
 public class ConfigModule : BaseCommandModule
 {
-    public Db Db { get; set; } = null!;
-    public Tba Tba { get; set; } = null!;
-
     [Command("event")]
     public async Task Event(CommandContext ctx, string eventKey)
     {

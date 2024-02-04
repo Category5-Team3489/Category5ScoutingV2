@@ -1,10 +1,4 @@
-﻿using Category5ScoutingV2.Database;
-using Category5ScoutingV2.TbaApi;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
-using Newtonsoft.Json;
-
-namespace Category5ScoutingV2.CommandModules;
+﻿namespace Category5ScoutingV2.CommandModules;
 
 #pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable CA1822 // Mark members as static
@@ -13,9 +7,6 @@ namespace Category5ScoutingV2.CommandModules;
 [Group("tba")]
 public class TbaModule : BaseCommandModule
 {
-    public Db Db { get; set; } = null!;
-    public Tba Tba { get; set; } = null!;
-
     [GroupCommand]
     public async Task Get(CommandContext ctx, [RemainingText] string endpoint)
     {

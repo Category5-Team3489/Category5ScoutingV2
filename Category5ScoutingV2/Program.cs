@@ -1,8 +1,4 @@
-﻿using Category5ScoutingV2;
-using Category5ScoutingV2.Database;
-using Category5ScoutingV2.TbaApi;
-
-CancellationTokenSource cts = new();
+﻿CancellationTokenSource cts = new();
 Console.CancelKeyPress += (s, e) =>
 {
     cts.Cancel();
@@ -11,36 +7,18 @@ Console.CancelKeyPress += (s, e) =>
 
 Console.WriteLine("Hello, World!");
 
-#region Database
-#if DEBUG
-string dbFilePath = "../../../database.dat";
-#else
-string dbFilePath = "database.dat";
-#endif
+Secrets secrets = Secrets.Load();
 
-Db db = new(dbFilePath);
-#endregion
+Db.Instance = new();
+Tba.AuthKey = secrets.TbaAuthKey;
 
-#region TBA
-string tbaApiKey = db.Op(data => data.TbaApiKey);
-Tba tba = new(tbaApiKey);
-#endregion
-
-db.Op(data =>
-{
-    data.Events.Add(new Event(2024, "2024scand", [], new()
-    {
-        [new TeamAndEvent(3489, "2024scand")] = new Modal("test")
-    }));
-});
-
-await Bot.RunAsync(db, tba);
+await Bot.RunAsync(secrets.BotToken);
 
 const double SaveIntervalSeconds = 30;
 while (!cts.IsCancellationRequested)
 {
-    db.Save();
+    Db.Save();
     await Task.Delay(TimeSpan.FromSeconds(SaveIntervalSeconds));
 }
 
-db.Save();
+Db.Save();
