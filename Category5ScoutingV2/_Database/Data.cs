@@ -7,8 +7,8 @@ namespace Category5ScoutingV2._Database;
 
 public class Data
 {
-    public string CurrentEventKey { get; set; } = "";
-    public Dictionary<string, Event> Events { get; set; } = [];
+    public EventKey CurrentEventKey { get; set; } = "";
+    public Dictionary<EventKey, Event> Events { get; set; } = [];
 }
 
 public record struct TeamEventModalKey(TeamNumber TeamNumber, EventKey EventKey, ModalKey ModalKey);
