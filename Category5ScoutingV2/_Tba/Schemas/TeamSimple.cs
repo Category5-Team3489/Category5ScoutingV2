@@ -2,11 +2,11 @@
 
 #pragma warning disable IDE1006 // Naming Styles
 
-public class EventSimple
+public class TeamSimple
 {
     public string key { get; set; } = "";
-    public string name { get; set; } = "";
-    public int year { get; set; }
+    public int team_number { get; set; }
+    public string nickname { get; set; } = "";
 }
 
 #pragma warning restore IDE1006 // Naming Styles

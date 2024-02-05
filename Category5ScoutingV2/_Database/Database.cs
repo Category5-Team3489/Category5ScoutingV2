@@ -1,6 +1,6 @@
 ﻿namespace Category5ScoutingV2._Database;
 
-public sealed class DatabaseOpReturnTypeException(Type type) : Exception($"Database operation return type must be a value type or string. Found {type}.");
+//public sealed class DatabaseOpReturnTypeException(Type type) : Exception($"Database operation return type must be a value type or string. Found {type}.");
 
 public static class Db
 {
@@ -64,7 +64,7 @@ public class Database
 
     public T Op<T>(Func<Data, T> func)
     {
-        ThrowIfOpReturnTypeIsInvalid<T>();
+        //ThrowIfOpReturnTypeIsInvalid<T>();
 
         lock (dataLock)
         {
@@ -72,11 +72,11 @@ public class Database
         }
     }
 
-    private static void ThrowIfOpReturnTypeIsInvalid<T>()
-    {
-        if (!typeof(T).IsValueType && typeof(T) != typeof(string))
-        {
-            throw new DatabaseOpReturnTypeException(typeof(T));
-        }
-    }
+    //private static void ThrowIfOpReturnTypeIsInvalid<T>()
+    //{
+    //    if (!typeof(T).IsValueType && typeof(T) != typeof(string))
+    //    {
+    //        throw new DatabaseOpReturnTypeException(typeof(T));
+    //    }
+    //}
 }

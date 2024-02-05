@@ -14,7 +14,7 @@ Tba.AuthKey = secrets.TbaAuthKey;
 
 await Bot.RunAsync(secrets.BotToken);
 
-const double SaveIntervalSeconds = 30;
+const double SaveIntervalSeconds = 3;
 while (!cts.IsCancellationRequested)
 {
     Db.Save();

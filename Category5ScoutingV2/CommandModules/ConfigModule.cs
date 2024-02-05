@@ -7,30 +7,7 @@
 [Group("config")]
 public class ConfigModule : BaseCommandModule
 {
-    [Command("event")]
-    public async Task Event(CommandContext ctx, string eventKey)
-    {
-        try
-        {
-            var eventSimple = await Tba.Get<EventSimple>($"/event/{eventKey}/simple");
 
-            if (eventSimple.key != eventKey)
-            {
-                throw new Exception($"Provided event key {eventKey} is not equal to found {eventSimple.key}");
-            }
-
-            Db.Op(data =>
-            {
-                data.CurrentEventKey = eventKey;
-            });
-
-            await ctx.RespondAsync($"Configured the current event as {eventSimple.name}.");
-        }
-        catch (Exception ex)
-        {
-            await ctx.RespondAsync(ex.ToString());
-        }
-    }
 }
 
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously

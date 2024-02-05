@@ -7,10 +7,10 @@
 //public class TemplateModule : BaseCommandModule
 //{
 //    [Command("template")]
-//    public async Task Template(CommandContext ctx)
+//    public async Task Template(CommandContext ctx) => await Cmd(ctx, async () =>
 //    {
 //        await ctx.RespondAsync("Hello, World!");
-//    }
+//    });
 //}
 
 //#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously

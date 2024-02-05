@@ -1,4 +1,9 @@
-﻿namespace Category5ScoutingV2._Database;
+﻿global using EventKey = string;
+global using MatchKey = string;
+global using ModalKey = string;
+global using TeamNumber = int;
+
+namespace Category5ScoutingV2._Database;
 
 public class Data
 {
@@ -6,21 +11,26 @@ public class Data
     public Dictionary<string, Event> Events { get; set; } = [];
 }
 
-public record struct TeamAndEvent(int TeamNumber, string EventKey);
+public record struct TeamEventModalKey(TeamNumber TeamNumber, EventKey EventKey, ModalKey ModalKey);
+public record struct TeamMatchModalKey(TeamNumber TeamNumber, MatchKey MatchKey, ModalKey ModalKey);
 
 public record Team(
-    int TeamNumber,
+    TeamNumber TeamNumber,
     string Nickname
 )
 {
+    [JsonIgnore]
     public string TeamKey => $"frc{TeamNumber}";
 }
 
 public record Event(
+    EventKey EventKey,
+
     int Year,
-    string EventKey,
     List<Team> Teams,
-    Dictionary<TeamAndEvent, Modal> Modals
+
+    Dictionary<TeamEventModalKey, Modal> TeamEventModals,
+    Dictionary<TeamMatchModalKey, Modal> TeamMatchModals
 );
 
-public record Modal(string Key);
+public record Modal(ModalKey ModalKey);

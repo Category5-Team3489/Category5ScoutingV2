@@ -14,4 +14,10 @@
     <PackageReference Include="DSharpPlus.SlashCommands" Version="5.0.0-nightly-01982" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Ephemeral\Finals\" />
+    <Folder Include="Ephemeral\Pre\" />
+    <Folder Include="Ephemeral\Pit\" />
+  </ItemGroup>
+
 </Project>
