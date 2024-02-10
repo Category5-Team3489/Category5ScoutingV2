@@ -11,7 +11,7 @@ public static class Social
             .AddComponents(new TextInputComponent(
                 label: "Instructions (DO NOT EDIT!)",
                 customId: "Social-instructions-modal",
-                value: "This should be used to answer questions with as much detail possible. Use the Check Label to help remember things said by the other team.",
+                value: "This should be used to answer questions with as much detail possible. Use the Check Label to help remember things said by the other team. Information is geared towards the social implications of pit scouting.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))

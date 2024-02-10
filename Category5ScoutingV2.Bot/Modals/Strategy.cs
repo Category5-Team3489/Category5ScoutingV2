@@ -11,14 +11,14 @@ public static class Strategy
             .AddComponents(new TextInputComponent(
                 label: "Instructions (DO NOT EDIT!)",
                 customId: "Strategy-instructions-modal",
-                value: "Instructions (DO NOT EDIT!)",
+                value: "Strategy related information of predictive scouting. Use the information gained to start making a game plan/strategy for the Playoffs. This can also be referred to during Alliance scouting.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
             .AddComponents(new TextInputComponent(
                 label: "Strategy compatibility with other robots.",
                 customId: "Strategy-1-modal",
-                placeholder: "Do they work well with pit. How do they work?",
+                placeholder: "Do we take different routes reducing traffic or do their auto pick up in different spots etc?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
@@ -32,7 +32,7 @@ public static class Strategy
             .AddComponents(new TextInputComponent(
                 label: "What auto/scoring areas are used in finals?",
                 customId: "Strategy-3-modal",
-                placeholder: "What auto, scoring paths, routes, strategy, etc are they most likely to use  during finals?",
+                placeholder: "What auto, scoring paths, routes, strategy, etc are they most likely to use during finals?",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))

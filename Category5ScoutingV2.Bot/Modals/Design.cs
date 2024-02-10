@@ -11,7 +11,7 @@ public static class Design
             .AddComponents(new TextInputComponent(
                 label: "Instructions (DO NOT EDIT!)",
                 customId: "Design-instructions-modal",
-                value: "This should be used to answer questions with as much detail possible. Use the Check Label to help remember things said by the other team.",
+                value: "This should be used to answer questions with as much detail possible. Use the Check Label to help remember things said by the other team. Give information that describes the physical aspects of the robot.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))

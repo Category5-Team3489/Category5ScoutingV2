@@ -11,7 +11,7 @@ public static class Predict
             .AddComponents(new TextInputComponent(
                 label: "Instructions (DO NOT EDIT!)",
                 customId: "Predict-instructions-modal",
-                value: "This should be used while Alliance’s are playing and and right after Alliances are picked.",
+                value: "Predict what will happen to your individual robot later in the competition. This will help us be prepared for Alliance scouting and Playoffs. Have this completed before Alliance Picking.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))

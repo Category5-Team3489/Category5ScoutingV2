@@ -14,7 +14,7 @@ public static class Teleop1
             .AddComponents(new TextInputComponent(
                 label: "Instructions (DO NOT EDIT!)",
                 customId: "Teleopinstructions-modal",
-                value: "Should be used as the game is going on, This should be a solid replacement for options like the Notes apps.\nDO NOT EDIT!",
+                value: "Write detailed information about the main portion of the game after auto but before robots start interacting with the stage. Use correct terminology when talking about game elements and game pieces. Highlight repeated behavior, routes, and trends.",
                 required: true,
                 style: TextInputStyle.Paragraph
             ))
