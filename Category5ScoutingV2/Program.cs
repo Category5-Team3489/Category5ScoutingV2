@@ -22,3 +22,15 @@ while (!cts.IsCancellationRequested)
 }
 
 Db.Save();
+
+// To-Do
+/*
+ * Look through code
+ * Get saving modals working
+*/
+
+// Maybes
+/*
+ * Ephemeral Interactions, "DeferAsync"
+ * 
+*/

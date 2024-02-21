@@ -50,7 +50,7 @@ public abstract class Modal
 
     protected void AddQuestions(TextInput textInput)
     {
-        textInputs.Add(textInput);
+        //textInputs.Add(textInput);
     }
 
     protected readonly struct TextInput()
