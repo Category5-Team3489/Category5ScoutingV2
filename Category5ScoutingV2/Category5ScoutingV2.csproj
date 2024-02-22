@@ -15,9 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Ephemeral\Finals\" />
-    <Folder Include="Ephemeral\Pre\" />
-    <Folder Include="Ephemeral\Pit\" />
+    <Folder Include="Ephemeral\Systems\Finals\" />
+    <Folder Include="Ephemeral\Systems\Pre\" />
+    <Folder Include="Ephemeral\Systems\Pit\" />
   </ItemGroup>
 
 </Project>

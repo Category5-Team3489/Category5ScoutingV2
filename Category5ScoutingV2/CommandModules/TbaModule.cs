@@ -8,22 +8,15 @@
 public class TbaModule : BaseCommandModule
 {
     [GroupCommand]
-    public async Task Get(CommandContext ctx, [RemainingText] string endpoint)
+    public async Task Get(CommandContext ctx, [RemainingText] string endpoint) => await Cmd(ctx, async () =>
     {
-        try
-        {
-            string json = await Tba.GetString(endpoint);
-            json = JsonConvert.SerializeObject(json, Formatting.Indented);
-            json = json.Replace("\\n", "\n");
-            json = json[1..^1];
+        string json = await Tba.GetString(endpoint);
+        json = JsonConvert.SerializeObject(json, Formatting.Indented);
+        json = json.Replace("\\n", "\n");
+        json = json[1..^1];
 
-            await ctx.RespondAsync(json);
-        }
-        catch (Exception ex)
-        {
-            await ctx.RespondAsync(ex.ToString());
-        }
-    }
+        await ctx.RespondAsync(json);
+    });
 }
 
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously

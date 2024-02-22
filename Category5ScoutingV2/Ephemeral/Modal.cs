@@ -4,7 +4,9 @@ namespace Category5ScoutingV2.Ephemeral;
 
 public abstract class Modal
 {
-    public abstract string Key { get; }
+    public abstract string Type { get; }
+    public abstract int SortingOrder { get; }
+    public abstract ButtonStyle ButtonStyle { get; }
 
     private readonly List<(TextInput textInput, bool save)> textInputs = [];
 
@@ -13,8 +15,8 @@ public abstract class Modal
         DiscordInteractionResponseBuilder builder = new();
 
         builder
-            .WithCustomId(Key)
-            .WithTitle(Key);
+            .WithCustomId(Type)
+            .WithTitle(Type);
 
         Build();
 
@@ -62,16 +64,30 @@ public abstract class Modal
         public TextInputStyle Style { get; init; } = TextInputStyle.Short;
         public int MinLength { get; init; } = 0;
         public int? MaxLength { get; init; } = null;
+
+        public void Validate()
+        {
+            // TODO Throw errors if properties are invalid
+
+            // TODO reserve ^ and $ characters for custom id, validate
+        }
     }
 
-    public static string GetCustomId(string key, string label)
+    public static string GetTextInputCustomId(string type, string label, bool saves)
     {
-        return $"{key}^{label}";
+        string end = saves ? "$" : "";
+        return $"{type}^{label}{end}";
     }
 
-    public static (string key, string label) SplitCustomId(string customId)
+    public static (string type, string label, bool saves) SplitTextInputCustomId(string customId)
     {
         // TODO Use the custom id to say if the textbox saves append S or N to the end or smthn
+
+        bool saves = customId.EndsWith('$');
+        if (saves)
+        {
+            customId = customId[..^1];
+        }
 
         string[] split = customId.Split('^');
         if (split.Length != 2)
@@ -79,6 +95,7 @@ public abstract class Modal
             throw new Exception($"Expected \"{customId}\" to split into exactly two.");
         }
 
-        return (split[0], split[1]);
+        //return (split[0], split[1]);
+        throw new NotImplementedException();
     }
 }
