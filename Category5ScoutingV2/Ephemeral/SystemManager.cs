@@ -1,5 +1,6 @@
 ﻿using Category5ScoutingV2.Ephemeral.Systems;
 using DSharpPlus.Entities;
+using FuzzySharp;
 
 namespace Category5ScoutingV2.Ephemeral;
 
@@ -9,6 +10,13 @@ public static class SystemManager
     public const string Pit = nameof(Pit);
     public const string Pre = nameof(Pre);
     public const string Finals = nameof(Finals);
+    public static readonly IReadOnlyDictionary<string, Func<System>> Systems = new Dictionary<string, Func<System>>
+    {
+        [Quals] = () => new QualsSystem(),
+        [Pit] = () => new PitSystem(),
+        [Pre] = () => new PreSystem(),
+        [Finals] = () => new FinalsSystem(),
+    };
 
     private static readonly TimeSpan PromptTimeout = TimeSpan.FromMinutes(60);
     private const string Close = nameof(Close);
@@ -22,13 +30,17 @@ public static class SystemManager
     {
         System system = CreateSystem(systemType);
 
+        string teamNickname = Db.Op(data => data.CurrentEvent.GetTeam(teamNumber)).Nickname;
+
         var embedBuilder = new DiscordEmbedBuilder()
-            .WithAuthor("TODO")
+            .WithAuthor(name: ctx.Member!.Nickname, iconUrl: ctx.Member!.AvatarUrl)
             .WithColor(system.EmbedColor)
             .WithTitle(system.Type)
-            .WithFooter($"Team {teamNumber} - INSERT TEAM NAME HERE");
+            .WithFooter($"Team {teamNumber} - {teamNickname}");
 
         system.BuildEmbed(embedBuilder);
+
+        // TODO Extract msg builder elsewhere, then use AddSystemButtons()
 
         var msg = await new DiscordMessageBuilder()
             .AddEmbed(embedBuilder)
@@ -38,14 +50,14 @@ public static class SystemManager
             })
             .AddComponents(new DiscordComponent[]
             {
-                new DiscordButtonComponent(ButtonStyle.Secondary, Quals, Quals),
-                new DiscordButtonComponent(ButtonStyle.Secondary, Pit, Pit),
-                new DiscordButtonComponent(ButtonStyle.Secondary, Pre, Pre),
-                new DiscordButtonComponent(ButtonStyle.Secondary, Finals, Finals),
+                SystemButton(Quals, system),
+                SystemButton(Pit, system),
+                SystemButton(Pre, system),
+                SystemButton(Finals, system),
             })
             .AddComponents(new DiscordComponent[]
             {
-                new DiscordButtonComponent(ButtonStyle.Danger, Close, Close)
+                Button(ButtonStyle.Danger, Close)
             })
             .WithReply(ctx.Message.Id, mention: true)
             .SendAsync(ctx.Channel);
@@ -65,10 +77,10 @@ public static class SystemManager
             // TODO Implement system type switching, so you dont have to type in a command to switch each time
             switch (result.Result.Id)
             {
-                case "Quals":
-                case "Pit":
-                case "Pre":
-                case "Finals":
+                case Quals:
+                case Pit:
+                case Pre:
+                case Finals:
                     throw new NotImplementedException();
             }
 
@@ -80,15 +92,44 @@ public static class SystemManager
         }
     }
 
+    #region Generic Helpers
     private static System CreateSystem(string systemType)
     {
-        return systemType switch
-        {
-            Quals => new QualsSystem(),
-            Pit => new PitSystem(),
-            Pre => new PreSystem(),
-            Finals => new FinalsSystem(),
-            _ => throw new NotImplementedException($"System type \"{systemType}\" is not implemented."),
-        };
+        var result = Process.ExtractOne(systemType, Systems.Keys);
+        return Systems[result.Value].Invoke();
     }
+
+    private static void AddSystemButtons(DiscordMessageBuilder builder, System currentSystem)
+    {
+        List<DiscordButtonComponent> buttons = [];
+        foreach ((var systemType, var constructor) in Systems)
+        {
+            buttons.Add(SystemButton(systemType, currentSystem));
+
+            if (buttons.Count == 5)
+            {
+                builder.AddComponents(buttons);
+                buttons = [];
+            }
+        }
+
+        if (buttons.Count > 0)
+        {
+            builder.AddComponents(buttons);
+        }
+    }
+
+    private static DiscordButtonComponent SystemButton(string systemType, System currentSystem)
+    {
+        const ButtonStyle Style = ButtonStyle.Secondary;
+
+        if (systemType == currentSystem.Type)
+        {
+            return new DiscordButtonComponent(Style, systemType, systemType, true);
+        }
+
+        return Button(Style, systemType);
+    }
+    private static DiscordButtonComponent Button(ButtonStyle style, string label) => new(style, label, label);
+    #endregion
 }

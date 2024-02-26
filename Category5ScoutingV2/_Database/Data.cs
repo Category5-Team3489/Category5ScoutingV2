@@ -9,6 +9,9 @@ public class Data
 {
     public EventKey CurrentEventKey { get; set; } = "";
     public Dictionary<EventKey, Event> Events { get; set; } = [];
+
+    [JsonIgnore]
+    public Event CurrentEvent => Events[CurrentEventKey];
 }
 
 public record struct TeamEventModalKey(TeamNumber TeamNumber, EventKey EventKey, ModalKey ModalKey);
@@ -31,6 +34,9 @@ public record Event(
 
     Dictionary<TeamEventModalKey, Modal> TeamEventModals,
     Dictionary<TeamMatchModalKey, Modal> TeamMatchModals
-);
+)
+{
+    public Team GetTeam(int teamNumber) => Teams.Find(t => t.TeamNumber == teamNumber) ?? throw new Exception($"Team {teamNumber} not found at current event {EventKey}.");
+}
 
 public record Modal(ModalKey ModalKey);

@@ -10,9 +10,9 @@ namespace Category5ScoutingV2.CommandModules;
 public class TestModule : BaseCommandModule
 {
     [Command("prompt")]
-    public async Task Prompt(CommandContext ctx) => await Cmd(ctx, async () =>
+    public async Task Prompt(CommandContext ctx, string systemType, int teamNumber) => await Cmd(ctx, async () =>
     {
-        await SystemManager.PromptSystem(ctx, SystemManager.Quals, 3489);
+        await SystemManager.PromptSystem(ctx, systemType, teamNumber);
     });
 }
 
