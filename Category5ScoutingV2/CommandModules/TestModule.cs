@@ -1,4 +1,4 @@
-﻿using Category5ScoutingV2.Ephemeral;
+﻿using Category5ScoutingV2.Ephemeral.Managers;
 
 namespace Category5ScoutingV2.CommandModules;
 

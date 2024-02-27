@@ -1,4 +1,6 @@
-﻿namespace Category5ScoutingV2;
+﻿using DSharpPlus.Entities;
+
+namespace Category5ScoutingV2;
 
 public static class Utils
 {
@@ -10,7 +12,11 @@ public static class Utils
         }
         catch (Exception ex)
         {
-            await ctx.RespondAsync(ex.ToString());
+            MemoryStream ms = new(System.Text.Encoding.UTF8.GetBytes(ex.ToString()));
+            await new DiscordMessageBuilder()
+                .AddFile("Exception.txt", ms)
+                .SendAsync(ctx.Channel);
+            // await ctx.RespondAsync(ex.ToString());
         }
     }
 }

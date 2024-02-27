@@ -1,4 +1,5 @@
-﻿using DSharpPlus.Entities;
+﻿using Category5ScoutingV2.Ephemeral.Managers;
+using DSharpPlus.Entities;
 
 namespace Category5ScoutingV2.Ephemeral.Systems;
 

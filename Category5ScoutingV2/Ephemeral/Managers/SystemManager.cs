@@ -2,7 +2,7 @@
 using DSharpPlus.Entities;
 using FuzzySharp;
 
-namespace Category5ScoutingV2.Ephemeral;
+namespace Category5ScoutingV2.Ephemeral.Managers;
 
 public static class SystemManager
 {
@@ -65,7 +65,7 @@ public static class SystemManager
         var interact = ctx.Client.GetInteractivity();
 
         DateTime start = DateTime.Now;
-        while ((DateTime.Now - start) < PromptTimeout)
+        while (DateTime.Now - start < PromptTimeout)
         {
             var result = await interact.WaitForButtonAsync(msg, ctx.User);
             if (result.TimedOut || result.Result.Id == Close)
@@ -102,7 +102,7 @@ public static class SystemManager
     private static void AddSystemButtons(DiscordMessageBuilder builder, System currentSystem)
     {
         List<DiscordButtonComponent> buttons = [];
-        foreach ((var systemType, var constructor) in Systems)
+        foreach (string systemType in Systems.Keys)
         {
             buttons.Add(SystemButton(systemType, currentSystem));
 
