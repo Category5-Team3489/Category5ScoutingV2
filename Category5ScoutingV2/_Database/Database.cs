@@ -40,7 +40,10 @@ public class Database
             string json = File.ReadAllText(FilePath);
             data = JsonConvert.DeserializeObject<Data>(json)!;
         }
-        catch { }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
 
         data ??= new();
     }

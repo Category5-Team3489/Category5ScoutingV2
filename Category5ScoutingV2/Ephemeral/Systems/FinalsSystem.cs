@@ -7,9 +7,5 @@ public class FinalsSystem : System
 {
     public override string Type => SystemManager.Finals;
     public override DiscordColor EmbedColor => DiscordColor.DarkRed;
-
-    public override DiscordInteractionResponseBuilder CreateModal(string modalType)
-    {
-        throw new NotImplementedException();
-    }
+    public override List<Modal> Modals => [new Finals.Finals(this)];
 }

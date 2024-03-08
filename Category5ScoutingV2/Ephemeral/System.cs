@@ -6,8 +6,5 @@ public abstract class System
 {
     public abstract string Type { get; }
     public abstract DiscordColor EmbedColor { get; }
-
-    public virtual void BuildEmbed(DiscordEmbedBuilder embedBuilder) { }
-
-    public abstract DiscordInteractionResponseBuilder CreateModal(string modalType);
+    public abstract List<Modal> Modals { get; }
 }

@@ -14,8 +14,32 @@ public class Data
     public Event CurrentEvent => Events[CurrentEventKey];
 }
 
-public record struct TeamModalKey(TeamNumber TeamNumber, ModalKey ModalKey);
-public record struct TeamMatchModalKey(TeamNumber TeamNumber, MatchKey MatchKey, ModalKey ModalKey);
+public record struct TeamModalKey(TeamNumber TeamNumber, ModalKey ModalKey)
+{
+    public static TeamModalKey FromString(string value)
+    {
+        string[] split = value.Split('|');
+        return new(TeamNumber.Parse(split[0]), split[1]);
+    }
+
+    public override readonly string ToString()
+    {
+        return $"{TeamNumber}|{ModalKey}";
+    }
+}
+public record struct TeamMatchModalKey(TeamNumber TeamNumber, MatchKey MatchKey, ModalKey ModalKey)
+{
+    public static TeamMatchModalKey FromString(string value)
+    {
+        string[] split = value.Split('|');
+        return new(TeamNumber.Parse(split[0]), split[1], split[2]);
+    }
+
+    public override readonly string ToString()
+    {
+        return $"{TeamNumber}|{MatchKey}|{ModalKey}";
+    }
+}
 
 public record Team(
     TeamNumber TeamNumber,
@@ -32,11 +56,9 @@ public record Event(
     int Year,
     List<Team> Teams,
 
-    Dictionary<TeamModalKey, Modal> TeamModals,
-    Dictionary<TeamMatchModalKey, Modal> TeamMatchModals
+    Dictionary<string, string> TeamData,
+    Dictionary<string, string> TeamMatchData
 )
 {
     public Team GetTeam(TeamNumber teamNumber) => Teams.Find(t => t.TeamNumber == teamNumber) ?? throw new Exception($"Team {teamNumber} not found at current event {EventKey}.");
 }
-
-public record Modal(ModalKey ModalKey);

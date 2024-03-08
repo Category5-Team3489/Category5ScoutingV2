@@ -15,10 +15,4 @@
     <PackageReference Include="FuzzySharp" Version="2.0.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Ephemeral\Systems\Finals\" />
-    <Folder Include="Ephemeral\Systems\Pre\" />
-    <Folder Include="Ephemeral\Systems\Pit\" />
-  </ItemGroup>
-
 </Project>

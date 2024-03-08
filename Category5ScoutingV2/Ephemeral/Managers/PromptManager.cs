@@ -1,4 +1,5 @@
 ﻿using DSharpPlus.Entities;
+using DSharpPlus.EventArgs;
 using FuzzySharp;
 using static Category5ScoutingV2.Ephemeral.Managers.SystemManager;
 
@@ -12,7 +13,7 @@ public static class PromptManager
         throw new NotImplementedException();
     }
 
-    public static async Task PromptSystem(CommandContext ctx, string systemType, TeamNumber teamNumber)
+    public static async Task PromptSystem(CommandContext ctx, string systemType, TeamNumber teamNumber, MatchKey? matchKey = null)
     {
         System system = CreateSystem(systemType);
 
@@ -24,23 +25,30 @@ public static class PromptManager
             .WithTitle(system.Type)
             .WithFooter($"Team {teamNumber} - {teamNickname}");
 
-        system.BuildEmbed(embedBuilder);
+        if (matchKey != null)
+        {
+            embedBuilder.WithDescription(matchKey);
+        }
+
+        var msgBuilder = new DiscordMessageBuilder()
+            .AddEmbed(embedBuilder);
+
+        AddModalButtons(msgBuilder, system, matchKey);
 
         // TODO Extract msg builder elsewhere, then use AddSystemButtons()
 
-        var msg = await new DiscordMessageBuilder()
-            .AddEmbed(embedBuilder)
-            .AddComponents(new DiscordComponent[]
-            {
-                new DiscordButtonComponent(ButtonStyle.Primary, "Hi", "Hi", emoji: new DiscordComponentEmoji(DiscordEmoji.FromName(ctx.Client, ":test_tube:")))
-            })
-            .AddComponents(new DiscordComponent[]
-            {
-                SystemButton(Quals, system),
-                SystemButton(Pit, system),
-                SystemButton(Pre, system),
-                SystemButton(Finals, system),
-            })
+        var msg = await msgBuilder
+            //.AddComponents(new DiscordComponent[]
+            //{
+            //    new DiscordButtonComponent(ButtonStyle.Primary, "Hi", "Hi", emoji: new DiscordComponentEmoji(DiscordEmoji.FromName(ctx.Client, ":test_tube:")))
+            //})
+            //.AddComponents(new DiscordComponent[]
+            //{
+            //    SystemButton(Quals, system),
+            //    SystemButton(Pit, system),
+            //    SystemButton(Pre, system),
+            //    SystemButton(Finals, system),
+            //})
             .AddComponents(new DiscordComponent[]
             {
                 Button(ButtonStyle.Danger, Close)
@@ -51,29 +59,85 @@ public static class PromptManager
         var interact = ctx.Client.GetInteractivity();
 
         DateTime start = DateTime.Now;
+        Task<InteractivityResult<ComponentInteractionCreateEventArgs>>? overrideButtonInteractTask = null;
         while (DateTime.Now - start < PromptTimeout)
         {
-            var result = await interact.WaitForButtonAsync(msg, ctx.User);
+            InteractivityResult<ComponentInteractionCreateEventArgs> result;
+            if (overrideButtonInteractTask == null)
+            {
+                result = await interact.WaitForButtonAsync(msg, ctx.User);
+            }
+            else
+            {
+                result = await overrideButtonInteractTask;
+                overrideButtonInteractTask = null;
+            }
+
             if (result.TimedOut || result.Result.Id == Close)
             {
                 await msg.DeleteAsync();
                 return;
             }
 
+            var resultId = result.Result.Id;
+
             // TODO Implement system type switching, so you dont have to type in a command to switch each time
-            switch (result.Result.Id)
+            //switch (resultId)
+            //{
+            //    case Quals:
+            //    case Pit:
+            //    case Pre:
+            //    case Finals:
+            //        throw new NotImplementedException();
+            //}
+
+            //await result.Result.Interaction.DeferAsync(true);
+
+            DiscordInteractionResponseBuilder modal = system.Modals.Find(m => m.Type == resultId)!.Get(teamNumber, matchKey);
+
+            await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, modal);
+
+            var modalInteractTask = interact.WaitForModalAsync(modal.CustomId, ctx.User);
+            var buttonInteractTask = interact.WaitForButtonAsync(msg, ctx.User);
+
+            await Task.WhenAny(modalInteractTask, buttonInteractTask);
+
+            if (buttonInteractTask.IsCompleted)
             {
-                case Quals:
-                case Pit:
-                case Pre:
-                case Finals:
-                    throw new NotImplementedException();
+                overrideButtonInteractTask = buttonInteractTask;
+                continue;
             }
 
-            await result.Result.Interaction.DeferAsync(true);
-            await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, new DiscordInteractionResponseBuilder()
-               .WithCustomId("test")
-               .WithTitle("Test")
+            var modalInteract = await modalInteractTask;
+
+            if (modalInteract.TimedOut)
+            {
+                await msg.DeleteAsync();
+                return;
+            }
+
+            foreach ((ModalKey modalKey, string value) in modalInteract.Result.Values)
+            {
+                (string _, string modalType, string label, bool saves) = Modal.SplitTextInputCustomId(modalKey);
+                if (!saves)
+                {
+                    continue;
+                }
+
+                if (matchKey == null)
+                {
+                    Db.Op(data => data.CurrentEvent.TeamData[new TeamModalKey(teamNumber, modalKey).ToString()] = value);
+                }
+                else
+                {
+                    Db.Op(data => data.CurrentEvent.TeamMatchData[new TeamMatchModalKey(teamNumber, matchKey, modalKey).ToString()] = value);
+                }
+            }
+
+            await modalInteract.Result.Interaction.CreateResponseAsync(
+                InteractionResponseType.ChannelMessageWithSource,
+                new DiscordInteractionResponseBuilder()
+                    .WithContent("Submitted successfully!")
             );
         }
     }
@@ -83,6 +147,36 @@ public static class PromptManager
     {
         var result = Process.ExtractOne(systemType, SystemManager.Systems.Keys);
         return SystemManager.Systems[result.Value].Invoke();
+    }
+
+    private static void AddModalButtons(DiscordMessageBuilder builder, System currentSystem, MatchKey? matchKey = null)
+    {
+        List<DiscordButtonComponent> buttons = [];
+        List<Modal> modals;
+        if (matchKey == null)
+        {
+            modals = currentSystem.Modals.OrderBy(m => m.SortingOrder).Where(m => !m.IsMatchModal).ToList();
+        }
+        else
+        {
+            modals = currentSystem.Modals.OrderBy(m => m.SortingOrder).Where(m => m.IsMatchModal).ToList();
+        }
+
+        foreach (var modal in modals)
+        {
+            buttons.Add(Button(modal.ButtonStyle, modal.Type));
+
+            if (buttons.Count == 5)
+            {
+                builder.AddComponents(buttons);
+                buttons = [];
+            }
+        }
+
+        if (buttons.Count > 0)
+        {
+            builder.AddComponents(buttons);
+        }
     }
 
     private static void AddSystemButtons(DiscordMessageBuilder builder, System currentSystem)
