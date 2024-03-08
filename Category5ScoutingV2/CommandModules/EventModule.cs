@@ -6,11 +6,13 @@ namespace Category5ScoutingV2.CommandModules;
 #pragma warning disable CA1822 // Mark members as static
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 
+[Description("Commands related to the current event")]
 [Group("event")]
 public class EventModule : BaseCommandModule
 {
+    [Description("Sets the current event and imports TBA data")]
     [Command("update")]
-    public async Task Update(CommandContext ctx, EventKey eventKey) => await Cmd(ctx, async () =>
+    public async Task Update(CommandContext ctx, [Description("E.g. 2024scand")] EventKey eventKey) => await Cmd(ctx, async () =>
     {
         var eventSimple = await Tba.Get<EventSimple>($"/event/{eventKey}/simple");
 
@@ -38,6 +40,7 @@ public class EventModule : BaseCommandModule
         await ctx.RespondAsync($"Set the current event as {eventSimple.name}, and loaded all of the attending teams.");
     });
 
+    [Description("Lists teams attending the current event")]
     [Command("teams")]
     public async Task Teams(CommandContext ctx) => await Cmd(ctx, async () =>
     {

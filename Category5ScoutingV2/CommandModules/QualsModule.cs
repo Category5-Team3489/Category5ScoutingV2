@@ -1,16 +1,19 @@
-﻿namespace Category5ScoutingV2.CommandModules;
+﻿using Category5ScoutingV2.Ephemeral.Managers;
+
+namespace Category5ScoutingV2.CommandModules;
 
 #pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable CA1822 // Mark members as static
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 
-[Group("test")]
-public class TestModule : BaseCommandModule
+[Description("Commands to scout the qualification matches")]
+[Group("quals")]
+public class QualsModule : BaseCommandModule
 {
     [GroupCommand]
-    public async Task Test(CommandContext ctx) => await Cmd(ctx, async () =>
+    public async Task Quals(CommandContext ctx, TeamNumber teamNumber) => await Cmd(ctx, async () =>
     {
-        throw new NotImplementedException();
+        await PromptManager.PromptSystem(ctx, SystemManager.Quals, teamNumber);
     });
 }
 

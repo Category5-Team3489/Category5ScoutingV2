@@ -1,8 +1,22 @@
-﻿namespace Category5ScoutingV2.CommandModules;
+﻿using Category5ScoutingV2.Ephemeral.Managers;
 
-// TODO Get just input done
-// TODO Get list of all of commands for bot
-// TODO Just get tags working for input, like the example on discord
-internal class FinalsModule
+namespace Category5ScoutingV2.CommandModules;
+
+#pragma warning disable IDE0079 // Remove unnecessary suppression
+#pragma warning disable CA1822 // Mark members as static
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
+
+[Description("Commands to scout the playoff matches")]
+[Group("finals")]
+public class FinalsModule : BaseCommandModule
 {
+    [GroupCommand]
+    public async Task Finals(CommandContext ctx, TeamNumber teamNumber) => await Cmd(ctx, async () =>
+    {
+        await PromptManager.PromptSystem(ctx, SystemManager.Finals, teamNumber);
+    });
 }
+
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+#pragma warning restore CA1822 // Mark members as static
+#pragma warning restore IDE0079 // Remove unnecessary suppression

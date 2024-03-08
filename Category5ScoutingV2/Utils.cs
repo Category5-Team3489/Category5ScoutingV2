@@ -16,7 +16,6 @@ public static class Utils
             await new DiscordMessageBuilder()
                 .AddFile("Exception.txt", ms)
                 .SendAsync(ctx.Channel);
-            // await ctx.RespondAsync(ex.ToString());
         }
     }
 }

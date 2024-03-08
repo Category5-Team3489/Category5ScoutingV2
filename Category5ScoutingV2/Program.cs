@@ -26,6 +26,9 @@ Db.Save();
 // To-Do
 /*
  * Get saving modals working
+ * Tags
+ * Tags dropdown
+ * Pit robot pictures
 */
 
 // Maybes
@@ -33,3 +36,7 @@ Db.Save();
  * Ephemeral Interactions, "DeferAsync"
  * 
 */
+
+// TODO Get just input done
+// TODO Get list of all of commands for bot
+// TODO Just get tags working for input, like the example on discord

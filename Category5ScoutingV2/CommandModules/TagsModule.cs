@@ -4,14 +4,11 @@
 #pragma warning disable CA1822 // Mark members as static
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
 
-[Group("test")]
-public class TestModule : BaseCommandModule
+[Description("Commands to read and write tags to teams")]
+[Group("tags")]
+public class TagsModule : BaseCommandModule
 {
-    [GroupCommand]
-    public async Task Test(CommandContext ctx) => await Cmd(ctx, async () =>
-    {
-        throw new NotImplementedException();
-    });
+
 }
 
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
