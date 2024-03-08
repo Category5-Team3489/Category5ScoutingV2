@@ -21,7 +21,7 @@ public class SearchModule : BaseCommandModule
     //});
 
     // TODO require specific system
-    [GroupCommand]
+    [Command("team")]
     public async Task SearchTeam(CommandContext ctx, TeamNumber teamNumber) => await Cmd(ctx, async () =>
     {
         string teamNickname = Db.Op(data => data.CurrentEvent.GetTeam(teamNumber)).Nickname;

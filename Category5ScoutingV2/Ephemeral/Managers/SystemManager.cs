@@ -16,6 +16,6 @@ public static class SystemManager
         [Finals] = () => new FinalsSystem(),
     };
 
-    public static readonly TimeSpan PromptTimeout = TimeSpan.FromMinutes(60);
+    public static readonly TimeSpan PromptTimeout = TimeSpan.FromMinutes(10);
     public const string Close = nameof(Close);
 }
