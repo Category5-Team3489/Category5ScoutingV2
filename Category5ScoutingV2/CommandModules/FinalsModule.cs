@@ -11,10 +11,14 @@ namespace Category5ScoutingV2.CommandModules;
 public class FinalsModule : BaseCommandModule
 {
     [GroupCommand]
-    public async Task Finals(CommandContext ctx, TeamNumber teamNumber) => await Cmd(ctx, async () =>
+    public async Task Finals(CommandContext ctx, int allianceNumber) => await Cmd(ctx, async () =>
     {
-        // TODO Look up team captain and force team number to be that
-        await PromptManager.PromptSystem(ctx, SystemManager.Finals, teamNumber);
+        if (allianceNumber < 1 || allianceNumber > 8)
+        {
+            throw new Exception("Alliance number is not in the correct range.");
+        }
+
+        await PromptManager.PromptSystem(ctx, SystemManager.Finals, allianceNumber);
     });
 }
 

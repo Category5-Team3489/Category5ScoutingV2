@@ -17,13 +17,27 @@ public static class PromptManager
     {
         System system = CreateSystem(systemType);
 
-        string teamNickname = Db.Op(data => data.CurrentEvent.GetTeam(teamNumber)).Nickname;
+        var embedBuilder = new DiscordEmbedBuilder();
+        if (systemType == Finals)
+        {
+            embedBuilder
+                .WithAuthor(name: ctx.Member!.Nickname, iconUrl: ctx.Member!.AvatarUrl)
+                .WithColor(system.EmbedColor)
+                .WithTitle(system.Type)
+                .WithFooter($"Alliance {teamNumber}");
 
-        var embedBuilder = new DiscordEmbedBuilder()
-            .WithAuthor(name: ctx.Member!.Nickname, iconUrl: ctx.Member!.AvatarUrl)
-            .WithColor(system.EmbedColor)
-            .WithTitle(system.Type)
-            .WithFooter($"Team {teamNumber} - {teamNickname}");
+            teamNumber = -teamNumber;
+        }
+        else
+        {
+            string teamNickname = Db.Op(data => data.CurrentEvent.GetTeam(teamNumber)).Nickname;
+
+            embedBuilder
+                .WithAuthor(name: ctx.Member!.Nickname, iconUrl: ctx.Member!.AvatarUrl)
+                .WithColor(system.EmbedColor)
+                .WithTitle(system.Type)
+                .WithFooter($"Team {teamNumber} - {teamNickname}");
+        }
 
         if (matchKey != null)
         {
@@ -93,11 +107,12 @@ public static class PromptManager
 
             //await result.Result.Interaction.DeferAsync(true);
 
-            DiscordInteractionResponseBuilder modal = system.Modals.Find(m => m.Type == resultId)!.Get(teamNumber, matchKey);
+            var modal = system.Modals.Find(m => m.Type == resultId)!;
+            DiscordInteractionResponseBuilder modalBuilder = modal.Get(teamNumber, matchKey);
 
-            await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, modal);
+            await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, modalBuilder);
 
-            var modalInteractTask = interact.WaitForModalAsync(modal.CustomId, ctx.User, TimeSpan.FromMinutes(6));
+            var modalInteractTask = interact.WaitForModalAsync(modalBuilder.CustomId, ctx.User, TimeSpan.FromMinutes(6));
             //var buttonInteractTask = interact.WaitForButtonAsync(msg, ctx.User);
 
             //await Task.WhenAny(modalInteractTask, buttonInteractTask);
@@ -139,13 +154,15 @@ public static class PromptManager
                 }
             }
 
+            await modal.OnSubmit(ctx, teamNumber, modalInteract.Result.Values);
+
             await modalInteract.Result.Interaction.CreateResponseAsync(
                 InteractionResponseType.ChannelMessageWithSource,
                 new DiscordInteractionResponseBuilder()
                     .WithContent("Submitted successfully!")
             );
 
-            await msg.DeleteAsync();
+            //await msg.DeleteAsync();
         }
     }
 

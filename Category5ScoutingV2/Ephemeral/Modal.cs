@@ -12,6 +12,8 @@ public abstract class Modal(System system)
 
     private readonly List<(TextInput textInput, bool saves)> textInputs = [];
 
+    public virtual async Task OnSubmit(CommandContext ctx, TeamNumber teamNumber, IReadOnlyDictionary<string, string> values) { }
+
     public DiscordInteractionResponseBuilder Get(TeamNumber teamNumber, MatchKey? matchKey = null)
     {
         DiscordInteractionResponseBuilder builder = new();

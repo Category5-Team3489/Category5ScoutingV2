@@ -20,6 +20,7 @@ public static class Utils
         {
             MemoryStream ms = new(System.Text.Encoding.UTF8.GetBytes(ex.ToString()));
             await new DiscordMessageBuilder()
+                .WithContent(ex.Message)
                 .AddFile("Exception.txt", ms)
                 .SendAsync(ctx.Channel);
         }
