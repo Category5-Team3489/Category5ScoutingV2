@@ -8,6 +8,12 @@ public static class Utils
     {
         try
         {
+            if (!ctx.Channel.Name.Contains("spam"))
+            {
+                await ctx.RespondAsync("Please use the #bot-spam channel.");
+                return;
+            }
+
             await func();
         }
         catch (Exception ex)

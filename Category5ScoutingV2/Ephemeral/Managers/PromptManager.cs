@@ -49,29 +49,29 @@ public static class PromptManager
             //    SystemButton(Pre, system),
             //    SystemButton(Finals, system),
             //})
-            .AddComponents(new DiscordComponent[]
-            {
-                Button(ButtonStyle.Danger, Close)
-            })
+            //.AddComponents(new DiscordComponent[]
+            //{
+            //    Button(ButtonStyle.Danger, Close)
+            //})
             .WithReply(ctx.Message.Id, mention: true)
             .SendAsync(ctx.Channel);
 
         var interact = ctx.Client.GetInteractivity();
 
-        DateTime start = DateTime.Now;
-        Task<InteractivityResult<ComponentInteractionCreateEventArgs>>? overrideButtonInteractTask = null;
-        while (DateTime.Now - start < PromptTimeout)
+        //DateTime start = DateTime.Now;
+        //Task<InteractivityResult<ComponentInteractionCreateEventArgs>>? overrideButtonInteractTask = null;
+        //while (DateTime.Now - start < PromptTimeout)
         {
             InteractivityResult<ComponentInteractionCreateEventArgs> result;
-            if (overrideButtonInteractTask == null)
-            {
-                result = await interact.WaitForButtonAsync(msg, ctx.User);
-            }
-            else
-            {
-                result = await overrideButtonInteractTask;
-                overrideButtonInteractTask = null;
-            }
+            //if (overrideButtonInteractTask == null)
+            //{
+            result = await interact.WaitForButtonAsync(msg, ctx.User);
+            //}
+            //else
+            //{
+            //    result = await overrideButtonInteractTask;
+            //    overrideButtonInteractTask = null;
+            //}
 
             if (result.TimedOut || result.Result.Id == Close)
             {
@@ -97,16 +97,21 @@ public static class PromptManager
 
             await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, modal);
 
-            var modalInteractTask = interact.WaitForModalAsync(modal.CustomId, ctx.User);
-            var buttonInteractTask = interact.WaitForButtonAsync(msg, ctx.User);
+            var modalInteractTask = interact.WaitForModalAsync(modal.CustomId, ctx.User, TimeSpan.FromMinutes(6));
+            //var buttonInteractTask = interact.WaitForButtonAsync(msg, ctx.User);
 
-            await Task.WhenAny(modalInteractTask, buttonInteractTask);
+            //await Task.WhenAny(modalInteractTask, buttonInteractTask);
 
-            if (buttonInteractTask.IsCompleted)
-            {
-                overrideButtonInteractTask = buttonInteractTask;
-                continue;
-            }
+            //if (buttonInteractTask.IsCompleted)
+            //{
+            //    overrideButtonInteractTask = buttonInteractTask;
+            //    continue;
+            //}
+
+            var modifiedMsgBuilder = new DiscordMessageBuilder()
+                .AddEmbed(embedBuilder);
+
+            await msg.ModifyAsync(modifiedMsgBuilder);
 
             var modalInteract = await modalInteractTask;
 
@@ -139,6 +144,8 @@ public static class PromptManager
                 new DiscordInteractionResponseBuilder()
                     .WithContent("Submitted successfully!")
             );
+
+            await msg.DeleteAsync();
         }
     }
 
