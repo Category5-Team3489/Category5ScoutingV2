@@ -112,7 +112,7 @@ public static class PromptManager
 
             await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, modalBuilder);
 
-            var modalInteractTask = interact.WaitForModalAsync(modalBuilder.CustomId, ctx.User, TimeSpan.FromMinutes(6));
+            var modalInteractTask = interact.WaitForModalAsync(modalBuilder.CustomId, ctx.User, TimeSpan.FromMinutes(15));
             //var buttonInteractTask = interact.WaitForButtonAsync(msg, ctx.User);
 
             //await Task.WhenAny(modalInteractTask, buttonInteractTask);
