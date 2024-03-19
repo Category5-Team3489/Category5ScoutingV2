@@ -48,6 +48,11 @@ public class SearchModule : BaseCommandModule
                     continue;
                 }
 
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    continue;
+                }
+
                 embedBuilder.AddField($"{systemType} - {modalType}: {label}", value);
             }
         });
@@ -114,7 +119,7 @@ public class SearchModule : BaseCommandModule
         var interactivity = ctx.Client.GetInteractivity();
         var pages = interactivity.GeneratePagesInEmbed(sb.ToString(), DSharpPlus.Interactivity.Enums.SplitType.Line, embedBuilder);
 
-        await ctx.Channel.SendPaginatedMessageAsync(ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(1.5));
+        await ctx.Channel.SendPaginatedMessageAsync(ctx.User, pages, timeoutoverride: TimeSpan.FromMinutes(5));
     });
 
     //[GroupCommand]
