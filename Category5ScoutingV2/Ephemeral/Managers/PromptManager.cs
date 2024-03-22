@@ -135,7 +135,7 @@ public static class PromptManager
 
             //InteractivityResult<ModalSubmitEventArgs> modalInteract = default!;
 
-            InteractivityResult<ModalSubmitEventArgs> modalInteract = await interact.WaitForModalAsync(modalBuilder.CustomId, ctx.User, TimeSpan.FromMinutes(4));
+            InteractivityResult<ModalSubmitEventArgs> modalInteract = await interact.WaitForModalAsync(modalBuilder.CustomId, ctx.User);
             //for (int i = 0; i < 10; i++)
             //{
             //    modalInteract = await interact.WaitForModalAsync(modalBuilder.CustomId, ctx.User, TimeSpan.FromSeconds(2));

@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
+using DSharpPlus.CommandsNext.Executors;
 
 namespace Category5ScoutingV2;
 
 public static class Bot
 {
-    private static readonly TimeSpan InteractivityTimeout = TimeSpan.FromMinutes(10);
+    private static readonly TimeSpan InteractivityTimeout = TimeSpan.FromMinutes(15);
     private static readonly string[] CommandPrefixes = ["!"];
 
     public static async Task RunAsync(string token)
@@ -27,6 +28,7 @@ public static class Bot
                 StringPrefixes = CommandPrefixes,
                 Services = services,
                 EnableDms = false,
+                CommandExecutor = new ParallelQueuedCommandExecutor(256),
             });
 
             commandsNext.RegisterCommands(Assembly.GetExecutingAssembly());
