@@ -63,10 +63,10 @@ public static class PromptManager
             //    SystemButton(Pre, system),
             //    SystemButton(Finals, system),
             //})
-            //.AddComponents(new DiscordComponent[]
-            //{
-            //    Button(ButtonStyle.Danger, Close)
-            //})
+            .AddComponents(new DiscordComponent[]
+            {
+                Button(ButtonStyle.Danger, Close)
+            })
             .WithReply(ctx.Message.Id, mention: true)
             .SendAsync(ctx.Channel);
 
@@ -112,7 +112,6 @@ public static class PromptManager
 
             await result.Result.Interaction.CreateResponseAsync(InteractionResponseType.Modal, modalBuilder);
 
-            var modalInteractTask = interact.WaitForModalAsync(modalBuilder.CustomId, ctx.User, TimeSpan.FromMinutes(15));
             //var buttonInteractTask = interact.WaitForButtonAsync(msg, ctx.User);
 
             //await Task.WhenAny(modalInteractTask, buttonInteractTask);
@@ -128,13 +127,21 @@ public static class PromptManager
 
             await msg.ModifyAsync(modifiedMsgBuilder);
 
-            var modalInteract = await modalInteractTask;
 
-            if (modalInteract.TimedOut)
-            {
-                await msg.DeleteAsync();
-                return;
-            }
+            //InteractivityResult<ModalSubmitEventArgs> modalInteract = default!;
+
+            InteractivityResult<ModalSubmitEventArgs> modalInteract = await interact.WaitForModalAsync(modalBuilder.CustomId, ctx.User, TimeSpan.FromMinutes(4));
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    modalInteract = await interact.WaitForModalAsync(modalBuilder.CustomId, ctx.User, TimeSpan.FromSeconds(2));
+
+            //    if (!modalInteract.TimedOut)
+            //    {
+            //        break;
+            //    }
+
+            //    await Task.Delay(1000);
+            //}
 
             foreach ((ModalKey modalKey, string value) in modalInteract.Result.Values)
             {
@@ -162,7 +169,7 @@ public static class PromptManager
                     .WithContent("Submitted successfully!")
             );
 
-            //await msg.DeleteAsync();
+            await msg.DeleteAsync();
         }
     }
 
