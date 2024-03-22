@@ -87,9 +87,14 @@ public static class PromptManager
             //    overrideButtonInteractTask = null;
             //}
 
-            if (result.TimedOut || result.Result.Id == Close)
+            if (result.TimedOut)
             {
-                await msg.DeleteAsync();
+                await msg.ModifyAsync("Command timeout! Enter the command again to resume.");
+                return;
+            }
+            else if (result.Result.Id == Close)
+            {
+                await msg.ModifyAsync("Closed interaction.");
                 return;
             }
 
@@ -143,6 +148,12 @@ public static class PromptManager
             //    await Task.Delay(1000);
             //}
 
+            if (modalInteract.TimedOut)
+            {
+                await msg.ModifyAsync("Modal timeout! Please type in the command again to resume.");
+                return;
+            }
+
             foreach ((ModalKey modalKey, string value) in modalInteract.Result.Values)
             {
                 (string _, string modalType, string label, bool saves) = Modal.SplitTextInputCustomId(modalKey);
@@ -168,8 +179,6 @@ public static class PromptManager
                 new DiscordInteractionResponseBuilder()
                     .WithContent("Submitted successfully!")
             );
-
-            await msg.DeleteAsync();
         }
     }
 
